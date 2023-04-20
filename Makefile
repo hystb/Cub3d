@@ -3,7 +3,7 @@ CC 			= cc
 
 CFLAGS 		= #-Wall -Wextra -Werror
 
-OFLAGS		= 
+MLXFLAGS	= #-ldl -lglfw -pthread -lm 
 
 NAME 		= cub3d
 #---------------------------------------------------#
@@ -24,7 +24,13 @@ INCLUDES 	= includes/
 
 HEADERS		= includes/parsing.h
 #---------------------------------------------------#
-LIBFT_DIR	= libft/
+MLX_DIR		= libs/mlx/
+
+MLX_NAME	= libmlx_Linux.a
+
+MLX_EXEC	= $(addprefix $(MLX_DIR), $(MLX_NAME))
+#---------------------------------------------------#
+LIBFT_DIR	= libs/libft/
 
 LIBFT_NAME	= libft.a
 
@@ -34,7 +40,7 @@ all: lib
 	$(MAKE) $(NAME)
 
 $(NAME): $(OBJS) $(INCLUDES) $(LIBFT_EXEC)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I $(INCLUDES) $(OFLAGS) $(LIBFT_EXEC)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I $(INCLUDES) $(MLXFLAGS) $(LIBFT_EXEC) $(MLX_EXEC)
 
 $(OBJ_DIR)/%.o : %.c Makefile $(HEADERS)
 	@mkdir -p $(@D)
@@ -42,9 +48,11 @@ $(OBJ_DIR)/%.o : %.c Makefile $(HEADERS)
 
 lib:
 	$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(MLX_DIR)
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(MLX_DIR) clean
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
@@ -53,6 +61,7 @@ fclean: clean
 
 re:	fclean
 	$(MAKE) -C $(LIBFT_DIR) re
+	$(MAKE) -C $(MLX_DIR) re
 	$(MAKE) all
 
 .PHONY: all lib fclean fclean re
