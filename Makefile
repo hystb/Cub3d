@@ -1,16 +1,16 @@
 #---------------------------------------------------#
 CC 			= cc
 
-CFLAGS 		= #-Wall -Wextra -Werror
+CFLAGS 		= -fsanitize=address #-Wall -Wextra -Werror
 
-MLXFLAGS	= #-ldl -lglfw -pthread -lm 
+MLXFLAGS	= -lm #-ldl -lglfw -pthread 
 
 NAME 		= cub3d
 #---------------------------------------------------#
 OBJ_DIR 	= obj/
 
 SRCS		= \
-main.c\
+exec/exec.c\
 parsing/parsing_utils.c\
 parsing/read_map.c\
 exit/exit_parsing.c\
@@ -22,7 +22,7 @@ OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 INCLUDES 	= includes/
 
-HEADERS		= includes/parsing.h
+HEADERS		= includes/parsing.h includes/exec.h
 #---------------------------------------------------#
 MLX_DIR		= libs/mlx/
 
