@@ -2,7 +2,7 @@
 
 int	isBlock(int x, int y, char **map)
 {
-	printf("%d | %d\n", x, y);
+	// printf("%d | %d\n", x, y);
 	if (map[y][x] != '0')
 		return (1);
 	return (0);
@@ -38,7 +38,7 @@ void rayLenght(double x, double y, double angle, char **map, double *t_len)
 	double	adjacent;
 	double	hyp;
 
-	// printf("x: %f, y: %f\n", x, y);
+	printf("x: %f, y: %f\n", x, y);
 	if (!isBlock(floor(x), floor(y), map))
 	{
 		if (angle <= 90)
@@ -62,7 +62,7 @@ void	launchRays(double x, double y, char **map)
 	double	len;
 
 	angle = 0;
-	while (angle <= 90)
+	while (angle <= 60)
 	{
 		len = 0;
 		rayLenght(x, y, angle, map, &len);
@@ -80,8 +80,8 @@ int main(void)
 	"100000001",\
 	"111111111"};
 
-	double x = 4.5;
-	double y = 2.5;
+	double x = 1.5;
+	double y = 3.5;
 	double t_len = 0;
 
 	// rayLenght(1, 1, 180, map, &t_len);
