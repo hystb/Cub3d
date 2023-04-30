@@ -38,11 +38,13 @@ char	**import_map(const char *file_map)
 	if (!fd)
 		return (NULL);
 	map[i++] = get_next_line(fd);
+	printf("%s", map[i - 1]);
 	if (!map[i - 1] && i > 0)
 		map_path_is_not_correct(map);
 	while (i < map_size)
 	{
 		map[i++] = get_next_line(fd);
+		printf("%s", map[i - 1]);
 		if (!map[i - 1] && i > 0)
 			map_path_is_not_correct(map);
 	}

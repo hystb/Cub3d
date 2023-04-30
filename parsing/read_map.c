@@ -1,12 +1,12 @@
 #include "../includes/parsing.h"
 
-char	**read_map(char *map_path)
+t_data_game	read_map(char *map_path)
 {
-	char	**map;
+	t_data_game	data;
 
 	check_extantion(map_path);
-	map = import_map(map_path);
+	data.all_readed = import_map(map_path);
 
-	return (map);
+	return (data);
 
 }

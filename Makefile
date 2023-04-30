@@ -1,7 +1,7 @@
 #---------------------------------------------------#
 CC 			= cc
 
-CFLAGS 		= #-Wall -Wextra -Werror
+CFLAGS 		= -Wall -Wextra -Werror -fsanitize=address -g3
 
 MLXFLAGS	= #-ldl -lglfw -pthread -lm 
 
