@@ -1,9 +1,9 @@
 #---------------------------------------------------#
 CC 			= cc
 
-CFLAGS 		= #-Wall -Wextra -Werror
+CFLAGS 		= -Wall -Wextra -Werror -fsanitize=address -g3
 
-MLXFLAGS	= #-ldl -lglfw -pthread -lm 
+MLXFLAGS	= -L/libs/mlx -Imlx_linux -lXext -lX11 -lm -lz #-ldl -lglfw -pthread -lm 
 
 NAME 		= cub3d
 #---------------------------------------------------#

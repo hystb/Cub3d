@@ -3,84 +3,94 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebillon <ebillon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 10:26:32 by ebillon           #+#    #+#             */
-/*   Updated: 2023/04/20 15:58:52 by ebillon          ###   ########.fr       */
+/*   Created: 2022/11/22 17:16:16 by nmilan            #+#    #+#             */
+/*   Updated: 2022/12/22 11:31:25 by nmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	readbuffer(int fd, char buffer[BUFFER_SIZE + 1])
+unsigned int	next_line_len(char *buffer)
 {
-	int		r_out;
-
-	r_out = read(fd, buffer, BUFFER_SIZE);
-	if (r_out == 0)
-		buffer[0] = '\0';
-	if (r_out < 0)
-		return (1);
-	buffer[r_out] = '\0';
-	return (0);
-}
-
-int	gnl_strlen(char *s)
-{
-	int	i;
+	unsigned int	i;
 
 	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\n' && s[i])
-		i++;
-	return (i);
-}
-
-int	count_to_nl(char *buff, int *c)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (buff[j] != '\n' && buff[j++])
-		i++;
-	*c += i;
-	return (i);
-}
-
-char	*ft_realloc(char *src, char *add, int lenght)
-{
-	char	*res;
-	char	*temp;
-	int		i;
-	int		j;
-
-	temp = src;
-	i = 0;
-	j = 0;
-	res = malloc(sizeof(char) * (gnl_strlen(src) + lenght + 1));
-	if (!res)
+	while (buffer[i] != '\n')
 	{
-		if (src)
-			free(src);
+		if (buffer[i] == '\0')
+		{
+			return (i);
+		}
+		i++;
+	}
+	return (i);
+}
+
+void	*ft_memmove_gnl(void *dst, const void *src, size_t len)
+{
+	const char	*str_src;
+	char		*str_dst;
+
+	if (!dst && !src)
+		return (dst);
+	str_dst = dst;
+	str_src = src;
+	if (str_dst < str_src)
+	{
+		while (len-- > 0)
+			*str_dst++ = *str_src++;
+		*str_dst = '\0';
+	}
+	else
+	{
+		str_src = src + (len - 1);
+		str_dst = dst + (len);
+		*str_dst-- = '\0';
+		while (len-- > 0)
+			*str_dst-- = *str_src--;
+	}
+	return (dst);
+}
+
+char	*ft_strjoin_gnl(char *s1, char *s2)
+{
+	int		i;
+	int		pos;
+	char	*tab;
+
+	if (!s1)
+		return (NULL);
+	if (!s2)
+	{
+		free(s1);
 		return (NULL);
 	}
-	if (src)
-		while (src[j])
-			res[i++] = src[j++];
-	while (lenght--)
-		res[i++] = *add++;
-	res[i] = '\0';
-	if (temp)
-		free(temp);
-	return (res);
+	tab = malloc(sizeof(char) * (ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1));
+	if (!(tab))
+		return (NULL);
+	i = 0;
+	pos = 0;
+	while (s1[i] != '\0')
+		tab[pos++] = s1[i++];
+	i = 0;
+	while (s2[i] != '\0')
+		tab[pos++] = s2[i++];
+	tab[pos] = '\0';
+	free(s1);
+	free(s2);
+	return (tab);
 }
 
-char	*errors(char **res)
+size_t	ft_strlen_gnl(const char *str)
 {
-	if (*res)
-		free(*res);
-	return (NULL);
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }
