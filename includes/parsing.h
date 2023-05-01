@@ -19,12 +19,14 @@ typedef struct s_game_data
 	void			*west;
 	char			**map;
 	char			**all_readed;
+	void			*mlx;
+	void			*win;
 }					t_data_game;
 
 //parsing
 int			len_column(const char *file_map);
 void		check_extantion(char *path_map);
-t_data_game	read_map(char *map_path);
+t_data_game	read_map(char *map_path, int i, int map_reached);
 char		**import_map(const char *file_map);
 
 //error

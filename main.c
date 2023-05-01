@@ -11,9 +11,10 @@ int	main(int argc, char **argv)
 	if (argc > 2)
 		return (write(1, "Error\nToo much args", 20));
 	//-------
-	data = read_map(argv[1]);
-	while (data.all_readed[i++])
-		printf("%s", data.all_readed[i - 1]);
+	data = read_map(argv[1], 0, 0);
+	while (data.map[i++])
+		printf("%s", data.map[i - 1]);
 	free_map(data.all_readed);
+	free(data.mlx);
 	return (0);
 }
