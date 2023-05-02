@@ -40,7 +40,7 @@ all: lib
 	$(MAKE) $(NAME)
 
 $(NAME): $(OBJS) $(INCLUDES) $(LIBFT_EXEC)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I $(INCLUDES) $(MLXFLAGS) $(LIBFT_EXEC) $(MLX_EXEC)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I $(INCLUDES) $(LIBFT_EXEC) $(MLX_EXEC) $(MLXFLAGS) 
 
 $(OBJ_DIR)/%.o : %.c Makefile $(HEADERS)
 	@mkdir -p $(@D)
