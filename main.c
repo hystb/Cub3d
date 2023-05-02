@@ -12,6 +12,7 @@ int	main(int argc, char **argv)
 		return (write(STDERR_FILENO, "Error\nToo much args", 20));
 	//-------
 	data = read_map(argv[1], 0, 0);
+	pars_map(data);
 	while (data.map[i++])
 		printf("%s", data.map[i - 1]);
 	free_map(data.all_readed);

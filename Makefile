@@ -5,7 +5,7 @@ CFLAGS 		= -Wall -Wextra -Werror -fsanitize=address -g3
 
 MLXFLAGS	= -L/libs/mlx -Imlx_linux -lXext -lX11 -lm -lz #-ldl -lglfw -pthread -lm 
 
-NAME 		= cub3d
+NAME 		= cub3D
 #---------------------------------------------------#
 OBJ_DIR 	= obj/
 
@@ -13,8 +13,9 @@ SRCS		= \
 main.c\
 parsing/parsing_utils.c\
 parsing/read_map.c\
+parsing/parsing_map.c\
 exit/exit_parsing.c\
-error/error_parsing.c
+error/error_parsing.c\
 
 OBJ_DIR 	= .obj
 
