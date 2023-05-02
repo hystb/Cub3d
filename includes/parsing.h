@@ -11,8 +11,10 @@
 
 typedef struct s_game_data
 {
-	unsigned char	floor[4];
-	unsigned char	roof[4];
+	unsigned char	floor[3];
+	unsigned char	roof[3];
+	int				is_floor;
+	int				is_roof;
 	void			*south;
 	void			*north;
 	void			*east;
