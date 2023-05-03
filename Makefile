@@ -3,7 +3,7 @@ CC 			= cc
 
 CFLAGS 		= -fsanitize=address #-Wall -Wextra -Werror
 
-MLXFLAGS	= -lm #-ldl -lglfw -pthread 
+MLXFLAGS	= -lm
 
 NAME 		= cub3d
 #---------------------------------------------------#
