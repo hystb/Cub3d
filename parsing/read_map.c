@@ -1,16 +1,19 @@
 #include "../includes/parsing.h"
 
-
-void	fill_img(void **img, char *str, t_data_game data)
+static void	fill_img(void **img, char *str, t_data_game data)
 {
 	int		width;
 	int		height;
 	int		i;
 	char	*tmp;
 
+	if (*img)
+		return ;
 	i = 0;
 	tmp = str;
-	str = &str[3];
+	str = &str[2];
+	while (str[i] == ' ')
+		str++;
 	while (str[i] && str[i] != '\n')
 		i++;
 	str[i] = '\0';
@@ -20,7 +23,7 @@ void	fill_img(void **img, char *str, t_data_game data)
 	return ;
 }
 
-void	fill_rgb(unsigned char *rgb, char *str, int *data)
+static void	fill_rgb(unsigned char *rgb, char *str, int *data)
 {
 	char	*tmp;
 	int		i;
@@ -32,9 +35,11 @@ void	fill_rgb(unsigned char *rgb, char *str, int *data)
 	while (i < 3)
 	{
 		j = 0;
-		while (str[j] && str[j] != ',')
+		while (str[j] && str[j] != '\n' && str[j] != ',')
 			j++;
 		str[j] = '\0';
+		if (j == 0)
+			return ;
 		rgb[i] = ft_atoi(str);
 		str[j] = ',';
 		str = &str[j + 1];
@@ -42,6 +47,25 @@ void	fill_rgb(unsigned char *rgb, char *str, int *data)
 	}
 	*data = 1;
 	str = tmp;
+}
+
+static void	fill_data(char *map_path, t_data_game *data)
+{
+	check_extantion(map_path);
+	data->all_readed = import_map(map_path);
+	data->east = NULL;
+	data->map = NULL;
+	data->south = NULL;
+	data->west = NULL;
+	data->north = NULL;
+	data->is_floor = 0;
+	data->is_roof = 0;
+	data->spawn[0] = 0;
+	data->spawn[1] = 0;
+	data->spawn[2] = 0;
+	data->mlx = mlx_init();
+	if (!data->mlx)
+		exit (1);
 	return ;
 }
 
@@ -49,18 +73,7 @@ t_data_game	read_map(char *map_path, int i, int map_reached)
 {
 	t_data_game	data;
 
-	check_extantion(map_path);
-	data.all_readed = import_map(map_path);
-	data.east = NULL;
-	data.map = NULL;
-	data.south = NULL;
-	data.west = NULL;
-	data.north = NULL;
-	data.is_floor = 0;
-	data.is_roof = 0;
-	data.mlx = mlx_init();
-	if (!data.mlx)
-		exit (1);
+	fill_data(map_path, &data);
 	while (data.all_readed[i] && map_reached == 0)
 	{
 		if (data.all_readed[i][0] == '\n')
