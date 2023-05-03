@@ -70,7 +70,10 @@ int	isBlockTouched(double x, double y, char **map)
 
 double getRad(double angle)
 {
-	return (angle * M_PI / 180);
+	double	temp;
+
+	temp = (int) angle % 90;
+	return (temp * M_PI / 180);
 }
 
 double get_Distance(double xA, double yA, double xB, double yB)
@@ -96,20 +99,72 @@ t_coord *do_first_quarter(double x, double y, double angle)
 		opposite = y - floor(y);
 	hyp_to_hori = opposite / sin(angle);
 	if (hyp_to_vert > hyp_to_hori)
-		return &(t_coord){x + opposite / tan(angle), y = y - opposite};
+		return &(t_coord){x + opposite / tan(angle), y - opposite};
 	else
 		return &(t_coord){x + adjacent, y - adjacent * tan(angle)};
 }
 
+t_coord *do_second_quarter(double x, double y, double angle)
+{
+	double	adjacent;
+	double	opposite;
+	double	hyp_to_hori;
+	double	hyp_to_vert;
+
+	if (x == ceil(x)) // vertical
+		adjacent = 1;
+	else
+		adjacent = ceil(x) - x;
+	hyp_to_vert = adjacent / cos(angle);
+	if (y == ceil(y)) // horizontal
+		opposite = 1;
+	else
+		opposite = ceil(y) - y;
+	hyp_to_hori = opposite / sin(angle);
+	if (hyp_to_vert > hyp_to_hori)
+		return &(t_coord){x + opposite / tan(angle), y + opposite};
+	else
+		return &(t_coord){x + adjacent, y + adjacent * tan(angle)};
+}
+
+t_coord *do_third_quarter(double x, double y, double angle)
+{
+	double	adjacent;
+	double	opposite;
+	double	hyp_to_hori;
+	double	hyp_to_vert;
+
+	if (x == ceil(x)) // vertical
+		adjacent = 1;
+	else
+		adjacent = ceil(x) - x;
+	hyp_to_vert = adjacent / cos(angle);
+	if (y == ceil(y)) // horizontal
+		opposite = 1;
+	else
+		opposite = ceil(y) - y;
+	hyp_to_hori = opposite / sin(angle);
+	if (hyp_to_vert > hyp_to_hori)
+		return &(t_coord){x + opposite / tan(angle), y + opposite};
+	else
+		return &(t_coord){x + adjacent, y + adjacent * tan(angle)};
+}
+
 t_coord *rayLenght(double x, double y, double angle, char **map)
 {
-	t_coord	*next_touched;
+	t_coord	next_touched;
 
+	// printf("coords x: %f, y: %f\n", x, y);
 	if (!isBlockTouched(x, y, map))
 	{
-		if (angle <= 90)
-			next_touched = do_first_quarter(x, y, getRad(angle));	
-		rayLenght(next_touched->x, next_touched->y, angle, map);
+		if (angle < 90)
+			next_touched = *do_first_quarter(x, y, getRad(angle));	
+		if (angle >= 90 && angle < 180)
+			next_touched = *do_second_quarter(x, y, getRad(angle));
+		if (angle >= 180 && angle < 270)
+			next_touched = *do_third_quarter(x, y, getRad(angle));
+		// printf("ici %f %f\n", next_touched.x, next_touched.y);
+		rayLenght(next_touched.x, next_touched.y, angle, map);
 	}
 	else
 	{
@@ -127,7 +182,7 @@ void	launchRays(double x, double y, char **map)
 	t_coord	*touched;
 
 	angle = 0;
-	while (angle <= 90)
+	while (angle <= 180)
 	{
 		len = 0;
 		init = (t_coord) {x, y};
@@ -154,7 +209,7 @@ int main(void)
 
 	// rayLenght(1, 1, 180, map, &t_len);
 	// printf("x: %f, y: %f\n", x, y);
-	// rayLenght(x, y, 2, map);
+	// rayLenght(x, y, 90, map);
 	// printf("La longueur du segment %f\n", t_len);
 	launchRays(x, y, map);
 	// printf("is block x: %f, y: %f | -> %d\n", x, y, isBlockTouched(x, y, map));
