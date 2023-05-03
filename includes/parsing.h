@@ -13,11 +13,13 @@
 # define ERR_ASSET "Error\nNo all assets set\n"
 # define ERR_CHAR "Error\nNot correct char in the map\n"
 # define ERR_SPAWN "Error\nHave more than 1 spawn or 0\n"
+# define ERR_CLOSE "Error\nMap not close\n"
 
 typedef struct s_game_data
 {
 	unsigned char	floor[3];
 	unsigned char	roof[3];
+	int				spawn[3];
 	int				is_floor;
 	int				is_roof;
 	void			*south;
@@ -35,7 +37,7 @@ int			len_column(const char *file_map);
 void		check_extantion(char *path_map);
 t_data_game	read_map(char *map_path, int i, int map_reached);
 char		**import_map(const char *file_map);
-void		pars_map(t_data_game data);
+void		pars_map(t_data_game *data);
 
 //error
 void		map_path_is_not_correct(char **map);

@@ -1,6 +1,5 @@
 #include "../includes/parsing.h"
 
-
 static void	fill_img(void **img, char *str, t_data_game data)
 {
 	int		width;
@@ -61,6 +60,9 @@ static void	fill_data(char *map_path, t_data_game *data)
 	data->north = NULL;
 	data->is_floor = 0;
 	data->is_roof = 0;
+	data->spawn[0] = 0;
+	data->spawn[1] = 0;
+	data->spawn[2] = 0;
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		exit (1);

@@ -50,7 +50,6 @@ char	**import_map(const char *file_map)
 	return (map);
 }
 
-
 int	len_column(const char *file_map)
 {
 	int		map_size;
