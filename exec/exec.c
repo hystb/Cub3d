@@ -78,46 +78,40 @@ double get_Distance(double xA, double yA, double xB, double yB)
 	return (sqrt(pow((xB - xA), 2) + pow((yB - yA), 2)));
 }
 
-t_coord *rayLenght(double x, double y, double angle, char **map)
+t_coord *do_first_quarter(double x, double y, double angle, char **map)
 {
 	double	adjacent;
 	double	opposite;
 	double	hyp_to_hori;
 	double	hyp_to_vert;
 
+	if (x == ceil(x)) // vertical
+		adjacent = 1;
+	else
+		adjacent = ceil(x) - x;
+	hyp_to_vert = adjacent / cos(angle);
+	if (y == ceil(y)) // horizontal
+		opposite = 1;
+	else
+		opposite = y - floor(y);
+	hyp_to_hori = opposite / sin(angle);
+	if (hyp_to_vert > hyp_to_hori)
+		return &(t_coord){x + opposite / tan(angle), y - opposite};
+	else
+		return &(t_coord){x + adjacent, y - adjacent * tan(angle)};
+}
+
+t_coord *rayLenght(double x, double y, double angle, char **map)
+{
+	t_coord	*next_touched;
 
 	if (!isBlockTouched(x, y, map))
 	{
 		if (angle <= 90)
 		{
-			if (x == ceil(x)) // vertical
-				adjacent = 1;
-			else
-				adjacent = ceil(x) - x;
-			hyp_to_vert = adjacent / cos(getRad(angle));
-			if (y == ceil(y)) // horizontal
-				opposite = 1;
-			else
-				opposite = y - floor(y);
-			hyp_to_hori = opposite / sin(getRad(angle));
-			// printf("hori -> %f | verti %f\n", hyp_to_hori, hyp_to_vert);
-			if (hyp_to_vert > hyp_to_hori)
-			{
-				// calculer avec hori
-				// printf("horizontal y - 1 opposite %f\n", opposite);
-				x = x + opposite / tan(getRad(angle));
-				y = y - opposite;
-			}
-			else
-			{
-				// calculer avec verti
-				// printf("vertical x + 1 adjacent %f\n", adjacent);;
-				x = x + adjacent;
-				y = y - adjacent * tan(getRad(angle));
-			}
-			// printf("x: %f, y: %f\n", x, y);
+			next_touched = do_first_quarter(x, y, getRad(angle), map);
 		}
-		rayLenght(x, y, angle, map);
+		rayLenght(next_touched->x, next_touched->y, angle, map);
 	}
 	else
 	{
