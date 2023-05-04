@@ -10,7 +10,10 @@ NAME 		= cub3D
 OBJ_DIR 	= obj/
 
 SRCS		= \
-main.c\
+exec/exec.c\
+exec/collision.c\
+exec/math_utils.c\
+exec/raylenght.c\
 parsing/parsing_utils.c\
 parsing/read_map.c\
 parsing/parsing_map.c\
@@ -23,7 +26,7 @@ OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 INCLUDES 	= includes/
 
-HEADERS		= includes/parsing.h
+HEADERS		= includes/parsing.h includes/exec.h
 #---------------------------------------------------#
 MLX_DIR		= libs/mlx/
 
