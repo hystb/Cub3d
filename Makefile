@@ -11,6 +11,9 @@ OBJ_DIR 	= obj/
 
 SRCS		= \
 exec/exec.c\
+exec/collision.c\
+exec/math_utils.c\
+exec/raylenght.c\
 parsing/parsing_utils.c\
 parsing/read_map.c\
 exit/exit_parsing.c\
