@@ -12,6 +12,14 @@ typedef struct s_coord
 	double y;
 }				t_coord;
 
+typedef struct	s_imgdata {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+}				t_imgdata;
+
 /* collisions */
 int 	get_face(double x, double y, char **map);
 int		is_block_touched(double x, double y, char **map);
@@ -22,6 +30,6 @@ double 	get_rad(double angle);
 int		is_whole_number(double e);
 
 /* raycasting */
-t_coord *ray_lenght(double x, double y, double angle, char **map);
+t_coord *ray_length(double x, double y, double angle, char **map);
 
 #endif

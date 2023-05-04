@@ -92,7 +92,7 @@ t_coord	*do_last_quarter(double x, double y, double angle)
 		return (&(t_coord){x - adjacent, y - adjacent * tan(angle)});
 }
 
-t_coord	*ray_lenght(double x, double y, double angle, char **map)
+t_coord	*ray_length(double x, double y, double angle, char **map)
 {
 	t_coord	next_touched;
 
@@ -106,7 +106,7 @@ t_coord	*ray_lenght(double x, double y, double angle, char **map)
 			next_touched = *do_third_quarter(x, y, get_rad(angle));
 		if (angle >= 270 && angle < 360)
 			next_touched = *do_last_quarter(x, y, get_rad(angle));
-		ray_lenght(next_touched.x, next_touched.y, angle, map);
+		ray_length(next_touched.x, next_touched.y, angle, map);
 	}
 	else
 		return (&(t_coord){x, y});

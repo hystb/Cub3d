@@ -1,7 +1,7 @@
 #---------------------------------------------------#
 CC 			= cc
 
-CFLAGS 		= -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS 		= #-Wall -Wextra -Werror #-fsanitize=address -g3
 
 MLXFLAGS	= -L/libs/mlx -Imlx_linux -lXext -lX11 -lm -lz #-ldl -lglfw -pthread -lm 
 
@@ -13,7 +13,7 @@ SRCS		= \
 exec/exec.c\
 exec/collision.c\
 exec/math_utils.c\
-exec/raylenght.c\
+exec/raylength.c\
 parsing/parsing_utils.c\
 parsing/read_map.c\
 parsing/parsing_map.c\
