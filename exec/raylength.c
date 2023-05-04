@@ -99,13 +99,13 @@ t_coord	*ray_length(double x, double y, double angle, char **map)
 	if (!is_block_touched(x, y, map))
 	{
 		if (angle < 90)
-			next_touched = *do_first_quarter(x, y, get_rad(angle));	
+			next_touched = *do_first_quarter(x, y, angle);	
 		if (angle >= 90 && angle < 180)
-			next_touched = *do_second_quarter(x, y, get_rad(angle));
+			next_touched = *do_second_quarter(x, y, angle);
 		if (angle >= 180 && angle < 270)
-			next_touched = *do_third_quarter(x, y, get_rad(angle));
+			next_touched = *do_third_quarter(x, y, angle);
 		if (angle >= 270 && angle < 360)
-			next_touched = *do_last_quarter(x, y, get_rad(angle));
+			next_touched = *do_last_quarter(x, y, angle);
 		ray_length(next_touched.x, next_touched.y, angle, map);
 	}
 	else

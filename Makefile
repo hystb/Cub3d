@@ -1,7 +1,7 @@
 #---------------------------------------------------#
 CC 			= cc
 
-CFLAGS 		= #-Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS 		= -fsanitize=address -g3 #-Wall -Wextra -Werror
 
 MLXFLAGS	= -L/libs/mlx -Imlx_linux -lXext -lX11 -lm -lz #-ldl -lglfw -pthread -lm 
 
@@ -14,6 +14,7 @@ exec/exec.c\
 exec/collision.c\
 exec/math_utils.c\
 exec/raylength.c\
+exec/img_utils.c\
 parsing/parsing_utils.c\
 parsing/read_map.c\
 parsing/parsing_map.c\
