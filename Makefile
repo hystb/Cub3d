@@ -1,11 +1,11 @@
 #---------------------------------------------------#
 CC 			= cc
 
-CFLAGS 		= -fsanitize=address #-Wall -Wextra -Werror
+CFLAGS 		= -Wall -Wextra -Werror #-fsanitize=address -g3
 
-MLXFLAGS	= -lm
+MLXFLAGS	= -L/libs/mlx -Imlx_linux -lXext -lX11 -lm -lz #-ldl -lglfw -pthread -lm 
 
-NAME 		= cub3d
+NAME 		= cub3D
 #---------------------------------------------------#
 OBJ_DIR 	= obj/
 
@@ -16,8 +16,9 @@ exec/math_utils.c\
 exec/raylenght.c\
 parsing/parsing_utils.c\
 parsing/read_map.c\
+parsing/parsing_map.c\
 exit/exit_parsing.c\
-error/error_parsing.c
+error/error_parsing.c\
 
 OBJ_DIR 	= .obj
 
@@ -43,7 +44,7 @@ all: lib
 	$(MAKE) $(NAME)
 
 $(NAME): $(OBJS) $(INCLUDES) $(LIBFT_EXEC)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I $(INCLUDES) $(MLXFLAGS) $(LIBFT_EXEC) $(MLX_EXEC)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I $(INCLUDES) $(LIBFT_EXEC) $(MLX_EXEC) $(MLXFLAGS) 
 
 $(OBJ_DIR)/%.o : %.c Makefile $(HEADERS)
 	@mkdir -p $(@D)

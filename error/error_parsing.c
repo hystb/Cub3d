@@ -6,4 +6,3 @@ void	map_path_is_not_correct(char **map)
 	free_map(map);
 	exit (0);
 }
-
