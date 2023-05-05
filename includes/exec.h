@@ -46,9 +46,10 @@ int			get_color(int r, int g, int b);
 /* math tools */
 double	get_distance(t_coord *a, t_coord *b);
 double 	get_rad(double angle);
+void	set_coord(t_coord *coord, double x, double y);
 int		is_whole_number(double e);
 
 /* raycasting */
-t_coord *ray_length(double x, double y, double angle, char **map);
+void	ray_length(double angle, char **map, t_coord *touched);
 
 #endif

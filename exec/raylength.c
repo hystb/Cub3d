@@ -1,6 +1,6 @@
 #include "../includes/exec.h"
 
-t_coord	*do_first_quarter(double x, double y, double angle)
+void	do_first_quarter(double x, double y, double angle, t_coord *touched)
 {
 	double	adjacent;
 	double	opposite;
@@ -18,12 +18,12 @@ t_coord	*do_first_quarter(double x, double y, double angle)
 		opposite = y - floor(y);
 	hyp_to_hori = opposite / sin(angle);
 	if (hyp_to_vert > hyp_to_hori)
-		return (&(t_coord){x + opposite / tan(angle), y - opposite});
+		set_coord(touched, x + opposite / tan(angle), y - opposite);
 	else
-		return (&(t_coord){x + adjacent, y - adjacent * tan(angle)});
+		set_coord(touched, x + adjacent, y - adjacent * tan(angle));
 }
 
-t_coord	*do_second_quarter(double x, double y, double angle)
+void	do_second_quarter(double x, double y, double angle, t_coord *touched)
 {
 	double	adjacent;
 	double	opposite;
@@ -41,12 +41,12 @@ t_coord	*do_second_quarter(double x, double y, double angle)
 		opposite = ceil(y) - y;
 	hyp_to_hori = opposite / sin(angle);
 	if (hyp_to_vert > hyp_to_hori)
-		return (&(t_coord){x + opposite / tan(angle), y + opposite});
+		set_coord(touched, x + opposite / tan(angle), y + opposite);
 	else
-		return (&(t_coord){x + adjacent, y + adjacent * tan(angle)});
+		set_coord(touched, x + adjacent, y + adjacent * tan(angle));
 }
 
-t_coord	*do_third_quarter(double x, double y, double angle)
+void	do_third_quarter(double x, double y, double angle, t_coord *touched)
 {
 	double	adjacent;
 	double	opposite;
@@ -64,12 +64,12 @@ t_coord	*do_third_quarter(double x, double y, double angle)
 		opposite = ceil(y) - y;
 	hyp_to_hori = opposite / sin(angle);
 	if (hyp_to_vert > hyp_to_hori)
-		return (&(t_coord){x - opposite / tan(angle), y + opposite});
+		set_coord(touched, x - opposite / tan(angle), y + opposite);
 	else
-		return (&(t_coord){x - adjacent, y + adjacent * tan(angle)});
+		set_coord(touched, x - adjacent, y + adjacent * tan(angle));
 }
 
-t_coord	*do_last_quarter(double x, double y, double angle)
+void	do_last_quarter(double x, double y, double angle, t_coord *touched)
 {
 	double	adjacent;
 	double	opposite;
@@ -87,27 +87,50 @@ t_coord	*do_last_quarter(double x, double y, double angle)
 		opposite = y - floor(y);
 	hyp_to_hori = opposite / sin(angle);
 	if (hyp_to_vert > hyp_to_hori)
-		return (&(t_coord){x - opposite / tan(angle), y - opposite});
+		set_coord(touched, x - opposite / tan(angle), y - opposite);
 	else
-		return (&(t_coord){x - adjacent, y - adjacent * tan(angle)});
+		set_coord(touched, x - adjacent, y - adjacent * tan(angle));
 }
 
-t_coord	*ray_length(double x, double y, double angle, char **map)
+void	ray_length(double angle, char **map, t_coord *touched)
 {
-	t_coord	next_touched;
+	double	premoduled_angle;
+	double	x;
+	double	y;
 
+	x = touched->x;
+	y = touched->y;
+	// printf("les coords x %f y %f | angle %f\n", x, y, angle * 180 / M_PI);
 	if (!is_block_touched(x, y, map))
 	{
-		if (angle < 90)
-			next_touched = *do_first_quarter(x, y, angle);	
-		if (angle >= 90 && angle < 180)
-			next_touched = *do_second_quarter(x, y, angle);
-		if (angle >= 180 && angle < 270)
-			next_touched = *do_third_quarter(x, y, angle);
-		if (angle >= 270 && angle < 360)
-			next_touched = *do_last_quarter(x, y, angle);
-		ray_length(next_touched.x, next_touched.y, angle, map);
+	// 	printf("l'angle qui arrive %f | %f \n", angle * 180 / M_PI, get_rad(angle));
+		premoduled_angle = fmod(angle, M_PI * 2);
+		// printf("voici l'angle premodulé %f\n", premoduled_angle);
+		if (angle < M_PI_2)
+		{
+			// puts("gauche");
+			do_last_quarter(x, y, get_rad(premoduled_angle), touched);
+		}
+		if (angle >= M_PI_2 && angle < M_PI)
+		{
+			// puts("bas gauche");
+			do_third_quarter(x, y, get_rad(premoduled_angle), touched);
+		}
+		if (angle >= M_PI && angle < 3 * M_PI / 2)
+		{
+			// puts("bas droite");
+			do_second_quarter(x, y, get_rad(premoduled_angle), touched);	
+		}
+		if (angle >= 3 * M_PI / 2 && angle < 2 * M_PI)
+		{
+			// puts("droite");
+			do_first_quarter(x, y, get_rad(premoduled_angle), touched);
+		}
+		ray_length(premoduled_angle, map, touched);
 	}
 	else
-		return (&(t_coord){x, y});
+	{
+		// printf("final coords x %f y %f | angle %f\n", x, y, angle * 180 / M_PI);	
+		set_coord(touched, x, y);
+	}
 }
