@@ -7,9 +7,15 @@ int	is_whole_number(double e)
 	return (0);
 }
 
-double	get_distance(t_coord *a, t_coord *b)
+double	get_distance(t_coord *a, t_coord *b, double angle)
 {
-	return (sqrt(pow((b->x - a->x), 2) + pow((b->y - a->y), 2)));
+	double	distance;
+
+	distance = sqrt(pow((b->x - a->x), 2) + pow((b->y - a->y), 2));
+	angle = fmod(angle, M_PI * 2);
+	angle = get_rad(angle);
+	// printf("voici l'angle utilisé pour la correction %f\n", angle);
+	return (distance * cos(angle));
 }
 
 void	set_coord(t_coord *coord, double x, double y)
