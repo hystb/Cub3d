@@ -43,7 +43,7 @@ int 	get_face(double x, double y, char **map);
 int		is_block_touched(double x, double y, char **map);
 
 /* mlx draw	*/
-t_imgdata	*draw_vertical_line(int height, void *mlx, int color, t_player *p);
+void	draw_vertical_line(int height, void *mlx, int color, t_player *p, int i, t_imgdata *img);
 int			get_color(int r, int g, int b);
 
 /* math tools */

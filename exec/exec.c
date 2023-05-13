@@ -4,15 +4,18 @@ void	render(void *mlx, t_player *p, char **map)
 {
 	double		angle = p->actual_fov - p->fov_size / 2;
 	double		end = angle + p->fov_size;
+	t_imgdata	*img;
 	double		distance;
 	double		item_size;
 	t_coord 	*touched;
-	t_imgdata 	*img;
 	void		*mlx_win;
 	int			i = p->win_x;
 
 	touched = malloc(sizeof(t_coord)); // protection
 	// printf("debut %f | fin %f\n", angle, end);
+	img = malloc(sizeof(t_imgdata));
+	img->img = mlx_new_image(mlx, p->win_x, p->win_y);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->size_line, &img->endian);
 	while (angle <= end)
 	{
 		touched->x = p->position->x;
@@ -24,13 +27,13 @@ void	render(void *mlx, t_player *p, char **map)
 		if (item_size > p->win_y)
 			item_size = p->win_y;
 		// printf("Voici la distance %f | la face touchée est %d (x: %f, y: %f) | angle %f, init angle %f \n", distance, get_face(touched->x, touched->y, map), touched->x, touched->y, angle * 180 / M_PI, angle);
-		img	= draw_vertical_line(item_size, mlx, get_color(50 * get_face(touched->x, touched->y, map), 100, 0), p);
-		mlx_put_image_to_window(mlx, p->mlx_win, img->img, i, 0);
+		draw_vertical_line(item_size, mlx, get_color(50 * get_face(touched->x, touched->y, map), 100, 0), p, i, img);
 		angle += p->step;
-		mlx_destroy_image(mlx, img->img);
-		free(img);
 		i--;
 	}
+	mlx_put_image_to_window(mlx, p->mlx_win, img->img, i, 0);
+	mlx_destroy_image(mlx, img->img);
+	free(img);
 	free(touched);
 }
 
@@ -60,12 +63,12 @@ int	action(int keycode, t_player *player)
 	if (keycode == 65361)
 	{
 		puts("gauceh");
-		player->actual_fov += 0.05;
+		player->actual_fov += 0.02;
 		render(player->mlx, player, player->map);
 	}
 	else if (keycode == 65363)
 	{
-		player->actual_fov -= 0.05;
+		player->actual_fov -= 0.02;
 		render(player->mlx, player, player->map);
 	}
 	else if (keycode == 115)
@@ -120,7 +123,7 @@ int main(void)
 	player->mlx = mlx_init();
 	player->mlx_win = mlx_new_window(player->mlx, player->win_x, player->win_y, "Cub3D - Horizon");
 	render(player->mlx, player, map);
-	mlx_key_hook(player->mlx_win, &action, player);
+	mlx_hook(player->mlx_win, 2, 1L<<0, &action, player);
 	mlx_loop(player->mlx); //loop here;
 
 	free(map[0]);
