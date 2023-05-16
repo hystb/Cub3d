@@ -47,7 +47,7 @@ void	draw_vertical_line(int height, void *mlx, int color, t_player *p, int i, t_
 int			get_color(int r, int g, int b);
 
 /* math tools */
-double	get_distance(t_coord *a, t_coord *b, double angle);
+double	get_distance(t_coord *a, t_coord *b);
 double 	get_rad(double angle);
 void	set_coord(t_coord *coord, double x, double y);
 int		is_whole_number(double e);
