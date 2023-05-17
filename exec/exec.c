@@ -73,12 +73,12 @@ int	action(int keycode, t_player *player)
 	}
 	else if (keycode == 115)
 	{
-		player->position->y -= 0.1;
+		player->position->x -= 0.1;
 		render(player->mlx, player, player->map);
 	}
 	else if (keycode == 119)
 	{
-		player->position->y += 0.1;
+		player->position->x += 0.1;
 		render(player->mlx, player, player->map);
 	}
 }
@@ -89,7 +89,7 @@ int main(void)
 	ft_strdup("1111111111"),\
 	ft_strdup("1000000001"),\
 	ft_strdup("1000000001"),\
-	ft_strdup("1000000001"),\
+	ft_strdup("1000000101"),\
 	ft_strdup("1000000001"),\
 	ft_strdup("1000000001"),\
 	ft_strdup("1000000001"),\
@@ -107,7 +107,7 @@ int main(void)
 	// apres on va vers la droite;
 	player = malloc(sizeof(t_player)); // procteciotn
 
-	player->actual_fov = 90 * M_PI / 180;
+	player->actual_fov = 0 * M_PI / 180;
 	player->position = &position;
 	player->position->x = 6.5;
 	player->position->y = 4.5;
