@@ -97,36 +97,24 @@ void	ray_length(double angle, char **map, t_coord *touched)
 	double	premoduled_angle;
 	double	x;
 	double	y;
+	double	dir_vector_x;
+	double	dir_vector_y;
+	double	d_to_x;
+	double	d_to_y;
+	double	sx;
+	double	sy;
 
 	x = touched->x;
 	y = touched->y;
+	d_to_x = fabs((1 - (x - floor(x))));
+	d_to_y = fabs((1 - (y - floor(y))));
 	// printf("les coords x %f y %f | angle %f\n", x, y, angle * 180 / M_PI);
 	if (!is_block_touched(x, y, map))
 	{
 	// 	printf("l'angle qui arrive %f | %f \n", angle * 180 / M_PI, get_rad(angle));
 		premoduled_angle = fmod(angle, M_PI * 2);
-		// printf("voici l'angle premodulé %f\n", premoduled_angle);
-		// if (angle < M_PI_2)
-		// {
-			// puts("gauche");
-			// do_first_quarter(x, y, get_rad(premoduled_angle), touched);
-		// }
-		// if (angle >= M_PI_2 && angle < M_PI)
-		// {
-			// puts("bas gauche");
-			// do_last_quarter(x, y, get_rad(premoduled_angle), touched);
-		// }
-		// if (angle >= M_PI && angle < 3 * M_PI / 2)
-		// {
-			// puts("bas droite");
-			// do_third_quarter(x, y, get_rad(premoduled_angle), touched);
-		// }
-		// if (angle >= 3 * M_PI / 2 && angle < 2 * M_PI)
-		// {
-			// puts("droite");
-			// do_second_quarter(x, y, get_rad(premoduled_angle), touched);	
-		// }
-		ray_length(premoduled_angle, map, touched);
+		dir_vector_x = cos(premoduled_angle);
+		dir_vector_y = sin(premoduled_angle);
 	}
 	else
 	{

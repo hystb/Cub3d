@@ -47,8 +47,8 @@ void rays(t_player *p, char **map)
 
 	angle = 0 * M_PI / 180;
 	double limit = 2 * M_PI;
-	while (angle < limit)
-	{
+	// while (angle < limit)
+	// {
 		touched->x = p->position->x;
 		touched->y = p->position->y;
 // 		printf("init x%f y%f \n", touched->x, touched->y);
@@ -57,7 +57,7 @@ void rays(t_player *p, char **map)
 		distance = get_distance(p->position, touched);
 		printf("distance = %f | touched x %f y %f (face : %d), angle %f moduled %f\n", distance, touched->x, touched->y, get_face(touched->x, touched->y, map),angle * 180 / M_PI, get_rad(angle) * 180 / M_PI);
 		angle += 0.1;
-	}
+	// }
 	free(touched);
 }
 
@@ -106,8 +106,8 @@ int main(void)
 
 	player->actual_fov = 0 * M_PI / 180;
 	player->position = &position;
-	player->position->x = 2.5;
-	player->position->y = 4.5;
+	player->position->x = 2.3;
+	player->position->y = 5;
 	player->win_x = 1000;
 	player->win_y = 800;
 	player->fov_size = FOV;
@@ -127,6 +127,10 @@ int main(void)
 	free(map[1]);
 	free(map[2]);
 	free(map[3]);
+	free(map[4]);
+	free(map[5]);
+	free(map[6]);
+	free(map[7]);
 	free(player);
 }
 
