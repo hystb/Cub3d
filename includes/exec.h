@@ -28,6 +28,8 @@ typedef struct s_player
 	double	screen_ratio;
 	int		win_x;
 	int		win_y;
+	int		map_max_x;
+	int		map_max_y;
 }				t_player;
 
 typedef struct	s_imgdata {
@@ -51,8 +53,9 @@ double	get_distance(t_coord *a, t_coord *b);
 double 	get_rad(double angle);
 void	set_coord(t_coord *coord, double x, double y);
 int		is_whole_number(double e);
+double	get_degrees(double angle);
 
 /* raycasting */
-void	ray_length(double angle, char **map, t_coord *touched);
+void	ray_length(double angle, char **map, t_coord *touched, t_player *player);
 
 #endif

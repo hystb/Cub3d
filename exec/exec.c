@@ -20,7 +20,7 @@ void	render(void *mlx, t_player *p, char **map)
 	{
 		touched->x = p->position->x;
 		touched->y = p->position->y;
-		ray_length(M_PI * 2 + angle, map, touched);
+		ray_length(M_PI * 2 + angle, map, touched, p);
 		distance = get_distance(p->position, touched);
 		// distance = distance * sin(M_PI_2 - fmod(angle, M_PI_2)); //correction fisheye
 		item_size = p->win_y * (p->screen_ratio / distance);
@@ -47,17 +47,17 @@ void rays(t_player *p, char **map)
 
 	angle = 0 * M_PI / 180;
 	double limit = 2 * M_PI;
-	// while (angle < limit)
-	// {
+	while (angle < limit)
+	{
 		touched->x = p->position->x;
 		touched->y = p->position->y;
 // 		printf("init x%f y%f \n", touched->x, touched->y);
-		ray_length(M_PI * 2 + angle, map, touched);
+		ray_length(angle, map, touched, p);
 		// printf("init x %f y %f\n", p->position->x, p->position->y);
-		distance = get_distance(p->position, touched);
-		printf("distance = %f | touched x %f y %f (face : %d), angle %f moduled %f\n", distance, touched->x, touched->y, get_face(touched->x, touched->y, map),angle * 180 / M_PI, get_rad(angle) * 180 / M_PI);
+		// distance = get_distance(p->position, touched);
+		// printf("distance = %f | touched x %f y %f (face : %d), angle %f moduled %f\n", distance, touched->x, touched->y, get_face(touched->x, touched->y, map),angle * 180 / M_PI, get_rad(angle) * 180 / M_PI);
 		angle += 0.1;
-	// }
+	}
 	free(touched);
 }
 
@@ -106,14 +106,16 @@ int main(void)
 
 	player->actual_fov = 0 * M_PI / 180;
 	player->position = &position;
-	player->position->x = 2.3;
-	player->position->y = 5;
+	player->position->x = 1.5;
+	player->position->y = 1.5;
 	player->win_x = 1000;
 	player->win_y = 800;
 	player->fov_size = FOV;
 	player->step = player->fov_size / player->win_x;
 	player->screen_ratio = player->win_x / 2 / tan(player->fov_size / 2) / player->win_x;
 	player->map = map;
+	player->map_max_x = ft_strlen(map[1]);
+	player->map_max_y = 7;
 	// printf("voici le screen ration %f\n", player.screen_ratio);
 
 	rays(player, map);

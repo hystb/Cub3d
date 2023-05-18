@@ -32,12 +32,10 @@ void	set_coord(t_coord *coord, double x, double y)
 
 double	get_rad(double angle)
 {
-	// printf("le rad qui arrive %f\n", angle);
-	// if (angle < 0)
-		// angle = angle + M_PI * 2;
-	// if ((angle < M_PI_2 && angle >= 0) || (angle < 3 * M_PI / 2 && angle >= M_PI))  
-		// angle = M_PI_2 - fmod(angle, M_PI_2);
-	// else
-		angle = fmod(angle, M_PI_2);
-	return (angle);
+	return (angle * M_PI / 180);
+}
+
+double	get_degrees(double angle)
+{
+	return (angle * 180 / M_PI);
 }
