@@ -9,6 +9,8 @@
 
 
 # define FOV M_PI_2
+# define SPEED_MOV 0.09
+# define SPEED_CAM 0.04
 
 typedef struct s_coord
 {
@@ -32,6 +34,26 @@ typedef struct s_player
 	int		map_max_y;
 }				t_player;
 
+typedef struct s_raycast
+{
+	double	max_steps;
+	double	x;
+	double	y;
+	double	x_map;
+	double	y_map;
+	double	sin_angle;
+	double	cos_angle;
+	double	angle_view;
+	double	angle;
+	t_coord	vert;
+	t_coord hor;
+	double	depth_hor;
+	double	depth_ver;
+	double	depth_box;
+	double	result;
+}				t_raycast;
+
+
 typedef struct	s_imgdata {
 	void	*img;
 	char	*addr;
@@ -42,11 +64,11 @@ typedef struct	s_imgdata {
 
 /* collisions */
 int 	get_face(double x, double y, char **map);
-int		is_block_touched(double x, double y, char **map);
 
-/* mlx draw	*/
+/* mlx	*/
 void	draw_vertical_line(int height, void *mlx, int color, t_player *p, int i, t_imgdata *img);
-int			get_color(int r, int g, int b);
+int		get_color(int r, int g, int b);
+int		action(int keycode, t_player *player);
 
 /* math tools */
 double	get_distance(t_coord *a, t_coord *b);
@@ -56,6 +78,7 @@ int		is_whole_number(double e);
 double	get_degrees(double angle);
 
 /* raycasting */
-void	ray_length(double angle, char **map, t_coord *touched, t_player *player);
+void	render(void *mlx, t_player *p, char **map);
+void	ray_length(t_raycast *rcast, t_player *player, char **map, t_coord *touched);
 
 #endif

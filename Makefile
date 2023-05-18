@@ -1,9 +1,9 @@
 #---------------------------------------------------#
 CC 			= cc
 
-CFLAGS 		= #-fsanitize=address -g3 #-Wall -Wextra -Werror
+CFLAGS 		= -fsanitize=address -g3 #-Wall -Wextra -Werror
 
-MLXFLAGS	= -L/libs/mlx -Imlx_linux -lXext -lX11 -lm -lz #-ldl -lglfw -pthread -lm 
+MLXFLAGS	= -L/libs/mlx -Imlx_linux -lXext -lX11 -lm -lz
 
 NAME 		= cub3D
 #---------------------------------------------------#
@@ -14,6 +14,7 @@ exec/exec.c\
 exec/collision.c\
 exec/math_utils.c\
 exec/raylength.c\
+exec/actions.c\
 exec/img_utils.c\
 parsing/parsing_utils.c\
 parsing/read_map.c\
