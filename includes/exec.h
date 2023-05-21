@@ -8,7 +8,7 @@
 # include "../libs/mlx/mlx.h"
 
 
-# define FOV M_PI_2
+# define FOV get_rad(70)
 # define SPEED_MOV 0.09
 # define SPEED_CAM 0.04
 
@@ -45,8 +45,6 @@ typedef struct s_raycast
 	double	cos_angle;
 	double	angle_view;
 	double	angle;
-	t_coord	vert;
-	t_coord hor;
 	double	depth_hor;
 	double	depth_ver;
 	double	depth_box;
@@ -79,6 +77,6 @@ double	get_degrees(double angle);
 
 /* raycasting */
 void	render(void *mlx, t_player *p, char **map);
-void	ray_length(t_raycast *rcast, t_player *player, char **map, t_coord *touched);
+t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map);
 
 #endif

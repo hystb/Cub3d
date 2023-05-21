@@ -15,7 +15,6 @@ int	get_color(int r, int g, int b)
 
 void	draw_vertical_line(int height, void *mlx, int color, t_player *p, int i_img, t_imgdata *img)
 {
-
 	int			i;
 	int			start;
 	int			c_bottom;
