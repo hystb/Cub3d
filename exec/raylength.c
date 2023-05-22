@@ -13,7 +13,7 @@ t_coord	*c_point(double x, double y)
 }
 
 
-int		is_wall_touched(t_coord	*point, char **map, t_player *player)
+int	is_wall_touched(t_coord	*point, char **map, t_player *player)
 {
 	if (player->map_max_y < (int) point->y || (int) point->y < 0)
 		return (2);
@@ -101,14 +101,14 @@ void	readjust_point(t_coord *point, t_raycast *rcast, int mode)
 {
 	if (mode)
 	{
-		if (rcast->sin_angle > 0)
+		if (rcast->sin_angle < 0)
 			point->y -= 1;
 		else
 			point->y += 0.0001;
 	}
 	else
 	{
-		if (rcast->cos_angle > 0)
+		if (rcast->cos_angle < 0)
 			point->x -= 1;
 		else
 			point->x += 0.0001;	
@@ -136,19 +136,19 @@ t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map)
 	if (rcast->depth_hor > rcast->depth_ver)
 	{
 		rcast->result = rcast->depth_ver;
-		rcast->result = rcast->result * cos(rcast->angle - p->actual_fov);
+		// rcast->result = rcast->result * cos(rcast->angle - p->actual_fov);
 		readjust_point(vert, rcast, 0);
 		// printf("vert x %f y %f d %f angle %f\n", vert->x, vert->y, rcast->result, get_degrees(rcast->angle));
-		free(hor);
+		// free(hor);
 		return (vert);
 	}
 	else
 	{
 		rcast->result = rcast->depth_hor;
-		rcast->result = rcast->result * cos(rcast->angle - p->actual_fov);
+		// rcast->result = rcast->result * cos(rcast->angle - p->actual_fov);
 		readjust_point(hor, rcast, 1);
 		// printf("hor x %f y %f d %f angle %f\n", hor->x, hor->y, rcast->result, get_degrees(rcast->angle));
-		free(vert);
+		// free(vert);
 		return (hor);
 	}
 }

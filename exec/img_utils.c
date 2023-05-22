@@ -20,8 +20,8 @@ void	draw_vertical_line(int height, void *mlx, int color, t_player *p, int i_img
 	int			c_bottom;
 	int			c_top;
 	
-	c_bottom = get_color(0, 0, 100);
-	c_top = get_color(0, 100, 100);
+	c_bottom = get_color(50, 0, 100);
+	c_top = get_color(0, 100, 25);
 
 	i = 0;
 	start = floor(p->win_y / 2 - height / 2);

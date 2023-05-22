@@ -8,7 +8,7 @@
 # include "../libs/mlx/mlx.h"
 
 
-# define FOV get_rad(70)
+# define FOV get_rad(60)
 # define SPEED_MOV 0.09
 # define SPEED_CAM 0.04
 

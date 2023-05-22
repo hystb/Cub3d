@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebillon <ebillon@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 13:35:39 by ebillon           #+#    #+#             */
+/*   Updated: 2023/05/22 14:32:16 by ebillon          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/exec.h"
 
 void	render(void *mlx, t_player *p, char **map)
@@ -21,10 +33,13 @@ void	render(void *mlx, t_player *p, char **map)
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->size_line, &img->endian);
 	raycast->x = p->position->x;
 	raycast->y = p->position->y;
+	puts("startup");
 	while (raycast->angle <= end)
 	{	
 		touched = ray_length(raycast, p, map);
+		// printf("touche %f %f %f %f\n", touched->x, touched->y, get_distance(p->position, touched), raycast->result);
 		distance = raycast->result;
+		distance = raycast->result * cos(p->actual_fov - raycast->angle);
 		item_size = p->win_y * (p->screen_ratio / distance);
 		// printf("%f\n", item_size);
 		if (item_size > p->win_y)
@@ -33,6 +48,7 @@ void	render(void *mlx, t_player *p, char **map)
 		draw_vertical_line(item_size, mlx, get_color(30 * get_face(touched->x, touched->y, map), 20, 20), p, i, img);
 		raycast->angle += p->step;
 		i++;
+		free(touched);
 	}
 	mlx_put_image_to_window(mlx, p->mlx_win, img->img, 0, 0);
 	mlx_destroy_image(mlx, img->img);
@@ -50,18 +66,18 @@ void rays(t_player *p, char **map)
 	touched = malloc(sizeof(t_coord));
 	rcast = malloc(sizeof(t_raycast));
 
-	rcast->angle = 275 * M_PI / 180;
+	rcast->angle = 0 * M_PI / 180;
 	rcast->x = p->position->x;
 	rcast->y = p->position->y;
-	// double limit = 2 * M_PI;
-	// while (rcast->angle < limit)
-	// {
-		
-		ray_length(rcast, p, map);
+	double limit = 2 * M_PI;
+	while (rcast->angle < limit)
+	{
+		touched = ray_length(rcast, p, map);
+		printf("touched (x %f y %f) | distance %f | depth %f\n", touched->x, touched->y, get_distance(p->position, touched), rcast->result);
 		rcast->angle += 0.1;
-	// }
-	free(rcast);
-	free(touched);
+		// free(touched);
+	}
+	// free(rcast);
 }
 
 
@@ -88,7 +104,7 @@ int main(void)
 	player->position = &position;
 	player->position->x = 2;
 	player->position->y = 1.5;
-	player->win_x = 1000;
+	player->win_x = 1500;
 	player->win_y = 800;
 	player->fov_size = FOV;
 	player->step = player->fov_size / player->win_x;
@@ -97,7 +113,7 @@ int main(void)
 	player->map_max_x = ft_strlen(map[1]);
 	player->map_max_y = 3;
 
-	rays(player, map);
+	// rays(player, map);
 	player->mlx = mlx_init();
 	player->mlx_win = mlx_new_window(player->mlx, player->win_x, player->win_y, "Cub3D");
 	render(player->mlx, player, map);
