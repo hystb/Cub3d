@@ -17,12 +17,6 @@ double	get_distance(t_coord *a, t_coord *b)
 	return (distance);
 }
 
-void	set_coord(t_coord *coord, double x, double y)
-{
-	coord->x = x;
-	coord->y = y;
-}
-
 double	get_rad(double angle)
 {
 	return (angle * M_PI / 180);

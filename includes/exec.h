@@ -61,6 +61,7 @@ typedef struct	s_imgdata {
 }				t_imgdata;
 
 /* collisions */
+int		is_wall_touched(t_coord	*point, char **map, t_player *player);
 int 	get_face(double x, double y, char **map);
 
 /* mlx	*/
@@ -71,7 +72,6 @@ int		action(int keycode, t_player *player);
 /* math tools */
 double	get_distance(t_coord *a, t_coord *b);
 double 	get_rad(double angle);
-void	set_coord(t_coord *coord, double x, double y);
 int		is_whole_number(double e);
 double	get_degrees(double angle);
 

@@ -27,10 +27,3 @@ int	get_face(double x, double y, char **map)
 	}
 	return (0);
 }
-
-int	is_wall(char e)
-{
-	if (e == '1')
-		return (1);
-	return (0);
-}

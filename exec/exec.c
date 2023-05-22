@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/exec.h"
+#include "../includes/parsing.h"
 
 void	render(void *mlx, t_player *p, char **map)
 {
@@ -33,9 +34,9 @@ void	render(void *mlx, t_player *p, char **map)
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->size_line, &img->endian);
 	raycast->x = p->position->x;
 	raycast->y = p->position->y;
-	puts("startup");
 	while (raycast->angle <= end)
 	{	
+		printf("angle %f\n", get_degrees(raycast->angle));
 		touched = ray_length(raycast, p, map);
 		// printf("touche %f %f %f %f\n", touched->x, touched->y, get_distance(p->position, touched), raycast->result);
 		distance = raycast->result;
@@ -80,19 +81,14 @@ void rays(t_player *p, char **map)
 	// free(rcast);
 }
 
+int	do_render_loop(t_data_game *data)
+{
+	t_player
+}
+
 
 int main(void)
 {
-	char *map[20] = {\
-	ft_strdup("1111"),\
-	ft_strdup("1001"),\
-	ft_strdup("1001"),\
-	ft_strdup("1111")};
-	// ft_strdup("1000000001"),\
-	// ft_strdup("1000000001"),\
-	// ft_strdup("1000000001"),\
-	// ft_strdup("1111111111")};
-
 	t_player	*player;
 	t_coord		position;
 	t_imgdata	*img;
@@ -104,7 +100,7 @@ int main(void)
 	player->position = &position;
 	player->position->x = 2;
 	player->position->y = 1.5;
-	player->win_x = 1500;
+	player->win_x = 800;
 	player->win_y = 800;
 	player->fov_size = FOV;
 	player->step = player->fov_size / player->win_x;
