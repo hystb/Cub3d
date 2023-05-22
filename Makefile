@@ -16,11 +16,14 @@ exec/math_utils.c\
 exec/raylength.c\
 exec/actions.c\
 exec/img_utils.c\
+exec/utils.c\
 parsing/parsing_utils.c\
 parsing/read_map.c\
 parsing/parsing_map.c\
 exit/exit_parsing.c\
+exit/exit_exec.c\
 error/error_parsing.c\
+main.c
 
 OBJ_DIR 	= .obj
 

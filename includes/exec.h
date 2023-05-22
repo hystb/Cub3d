@@ -4,6 +4,7 @@
 # include <unistd.h>
 # include <math.h>
 # include <stdio.h>
+# include "parsing.h"
 # include "../libs/libft/libft.h"
 # include "../libs/mlx/mlx.h"
 
@@ -11,6 +12,7 @@
 # define FOV get_rad(60)
 # define SPEED_MOV 0.09
 # define SPEED_CAM 0.04
+# define WIN_TITLE "Cube3D"
 
 typedef struct s_coord
 {
@@ -18,24 +20,10 @@ typedef struct s_coord
 	double y;
 }				t_coord;
 
-typedef struct s_player
-{
-	t_coord *position;
-	void	*mlx_win;
-	void	*mlx;
-	char	**map;
-	double	actual_fov;
-	double	fov_size;
-	double	step;
-	double	screen_ratio;
-	int		win_x;
-	int		win_y;
-	int		map_max_x;
-	int		map_max_y;
-}				t_player;
-
 typedef struct s_raycast
 {
+	t_coord	*hor;
+	t_coord	*ver;
 	double	max_steps;
 	double	x;
 	double	y;
@@ -50,6 +38,22 @@ typedef struct s_raycast
 	double	depth_box;
 	double	result;
 }				t_raycast;
+
+typedef struct s_player
+{
+	t_coord		*position;
+	t_raycast	*rcast;
+	void	*mlx_win;
+	void	*mlx;
+	char	**map;
+	double	actual_view;
+	double	step;
+	double	screen_ratio;
+	int		win_x;
+	int		win_y;
+	int		map_max_x;
+	int		map_max_y;
+}				t_player;
 
 
 typedef struct	s_imgdata {
@@ -76,7 +80,15 @@ int		is_whole_number(double e);
 double	get_degrees(double angle);
 
 /* raycasting */
+void	edit_point(double x, double y, t_coord *point);
 void	render(void *mlx, t_player *p, char **map);
 t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map);
+int		do_render_loop(struct s_game_data *data);
+
+/* utils */
+void	ft_free(void *ptr);
+
+/* exit */
+void	free_exec_struct(t_player *p);
 
 #endif

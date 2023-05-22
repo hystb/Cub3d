@@ -17,6 +17,7 @@
 
 typedef struct s_game_data
 {
+	struct s_player	*p;
 	unsigned char	floor[3];
 	unsigned char	roof[3];
 	int				spawn[3];

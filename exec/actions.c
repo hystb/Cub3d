@@ -34,13 +34,13 @@ int	cam_move(t_player *p, double value)
 {
 	double	final_view;
 
-	final_view = p->actual_fov;
+	final_view = p->actual_view;
 	final_view += value * SPEED_CAM;
 	if (final_view < 0)
 		final_view = final_view + M_PI * 2;
 	if (final_view > M_PI * 2)
 		final_view = fmod (final_view, M_PI * 2);
-	p->actual_fov = final_view;
+	p->actual_view = final_view;
 	render(p->mlx, p, p->map);
 	return (0);
 }
@@ -56,11 +56,11 @@ int	action(int keycode, t_player *p)
 	else if (keycode == 65363)
 		return (cam_move(p, 1));
 	else if (keycode == 115)
-		return (move(p, cos(p->actual_fov + get_rad(180)), sin(p->actual_fov + get_rad(180))));
+		return (move(p, cos(p->actual_view + get_rad(180)), sin(p->actual_view + get_rad(180))));
 	else if (keycode == 119)
-		return (move(p, cos(p->actual_fov), sin(p->actual_fov)));
+		return (move(p, cos(p->actual_view), sin(p->actual_view)));
 	else if (keycode == 97)
-		return (move(p, cos(p->actual_fov - get_rad(90)), sin(p->actual_fov) - get_rad(90)));
+		return (move(p, cos(p->actual_view - get_rad(90)), sin(p->actual_view) - get_rad(90)));
 	else if (keycode == 100)
-		return (move(p, cos(p->actual_fov + get_rad(90)), sin(p->actual_fov) + get_rad(90)));
+		return (move(p, cos(p->actual_view + get_rad(90)), sin(p->actual_view) + get_rad(90)));
 }

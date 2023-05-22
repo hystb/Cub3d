@@ -25,10 +25,9 @@ void	render(void *mlx, t_player *p, char **map)
 	double		i;
 
 	i = 0;
-	raycast = malloc(sizeof(t_raycast)); // protection
-	touched = malloc(sizeof(t_coord));
-	raycast->angle = p->actual_fov - p->fov_size / 2;
-	end = raycast->angle + p->fov_size;
+	raycast = p->rcast;
+	raycast->angle = p->actual_view - FOV / 2;
+	end = raycast->angle + FOV;
 	img = malloc(sizeof(t_imgdata));
 	img->img = mlx_new_image(mlx, p->win_x, p->win_y);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->size_line, &img->endian);
@@ -40,92 +39,76 @@ void	render(void *mlx, t_player *p, char **map)
 		touched = ray_length(raycast, p, map);
 		// printf("touche %f %f %f %f\n", touched->x, touched->y, get_distance(p->position, touched), raycast->result);
 		distance = raycast->result;
-		distance = raycast->result * cos(p->actual_fov - raycast->angle);
 		item_size = p->win_y * (p->screen_ratio / distance);
-		// printf("%f\n", item_size);
 		if (item_size > p->win_y)
 			item_size = p->win_y;
-		// printf("le result %f %f\n", touched->x, touched->y);
 		draw_vertical_line(item_size, mlx, get_color(30 * get_face(touched->x, touched->y, map), 20, 20), p, i, img);
 		raycast->angle += p->step;
 		i++;
-		free(touched);
 	}
 	mlx_put_image_to_window(mlx, p->mlx_win, img->img, 0, 0);
 	mlx_destroy_image(mlx, img->img);
 	free(img);
-	free(raycast);
 }
 
-void rays(t_player *p, char **map)
+int	malloc_struct(t_data_game *data)
 {
-	double 		angle;
-	double		distance;
-	t_raycast	*rcast;
-	t_coord		*touched;
-
-	touched = malloc(sizeof(t_coord));
-	rcast = malloc(sizeof(t_raycast));
-
-	rcast->angle = 0 * M_PI / 180;
-	rcast->x = p->position->x;
-	rcast->y = p->position->y;
-	double limit = 2 * M_PI;
-	while (rcast->angle < limit)
+	data->p = malloc(sizeof(t_player));
+	if (data->p)
 	{
-		touched = ray_length(rcast, p, map);
-		printf("touched (x %f y %f) | distance %f | depth %f\n", touched->x, touched->y, get_distance(p->position, touched), rcast->result);
-		rcast->angle += 0.1;
-		// free(touched);
+		data->p->position = malloc(sizeof(t_coord));
+		data->p->rcast = malloc(sizeof(t_raycast));
+		if (data->p->rcast)
+		{
+			data->p->rcast->hor = malloc(sizeof(t_coord));
+			data->p->rcast->ver = malloc(sizeof(t_coord));
+		}
 	}
-	// free(rcast);
+	if (!data->p || !data->p->position || !data->p->rcast || !data->p->rcast->hor || !data->p->rcast->ver)
+		return (free_exec_struct(data->p), 1);
+	return (0);
+}
+
+/* 1 == width | 0 heigth */
+int	get_size_map(int mode, char **map)
+{
+	int	i;
+
+	if (mode)
+		return (ft_strlen(map[0]));
+	else
+	{
+		i = 0;
+		while (map[i])
+			i++;
+		return (i);
+	}
 }
 
 int	do_render_loop(t_data_game *data)
 {
-	t_player
+	if (malloc_struct(data))
+		free_exec_struct(data->p); // do something else here -> mean that *t_player is not correctly allocated
+	data->p->mlx = data->mlx;
+	data->p->win_x = 1000;
+	data->p->win_y = 800;
+	data->win = mlx_new_window(data->mlx, data->p->win_x, data->p->win_y, WIN_TITLE);
+	if (!data->mlx)
+		free_exec_struct(data->p); // samething but about mlx win here
+	data->p->mlx_win = data->win;
+	data->p->actual_view = 0; // add spawn angle from map reading
+	data->p->position->x = data->spawn[0];
+	data->p->position->y = data->spawn[1];
+	data->p->map = data->map;
+	data->p->map_max_x = get_size_map(1, data->map);
+	data->p->map_max_y = get_size_map(0, data->map);
+
+	// this part is to change to fix the little fish eye effect !
+	data->p->step = FOV / data->p->win_x;
+	data->p->screen_ratio = data->p->win_x / 2 / tan(FOV / 2) / data->p->win_x;
+	// end part
+
+	mlx_hook(data->p->mlx_win, 2, 1L<<0, &action, data->p); // movement, need to add "la croix rouge" to close program
+	render(data->mlx, data->p, data->map);
+	mlx_loop(data->p->mlx);
 }
-
-
-int main(void)
-{
-	t_player	*player;
-	t_coord		position;
-	t_imgdata	*img;
-	// 0 = droite ?;
-	// apres on va vers la droite;
-	player = malloc(sizeof(t_player)); // procteciotn
-
-	player->actual_fov = 0 * M_PI / 180;
-	player->position = &position;
-	player->position->x = 2;
-	player->position->y = 1.5;
-	player->win_x = 800;
-	player->win_y = 800;
-	player->fov_size = FOV;
-	player->step = player->fov_size / player->win_x;
-	player->screen_ratio = player->win_x / 2 / tan(player->fov_size / 2) / player->win_x;
-	player->map = map;
-	player->map_max_x = ft_strlen(map[1]);
-	player->map_max_y = 3;
-
-	// rays(player, map);
-	player->mlx = mlx_init();
-	player->mlx_win = mlx_new_window(player->mlx, player->win_x, player->win_y, "Cub3D");
-	render(player->mlx, player, map);
-	mlx_hook(player->mlx_win, 2, 1L<<0, &action, player);
-	mlx_loop(player->mlx); //loop here;
-
-	free(map[0]);
-	free(map[1]);
-	free(map[2]);
-	free(map[3]);
-	// free(map[4]);
-	// free(map[5]);
-	// free(map[6]);
-	// free(map[7]);
-	free(player);
-}
-
-// to actualize the value of fov and more by getting x and y ;
-// mlx_get_screen_size(mlx, &player.win_x, &player.win_y);

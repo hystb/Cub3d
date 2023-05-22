@@ -12,6 +12,13 @@ t_coord	*c_point(double x, double y)
 	return (point);
 }
 
+void	edit_point(double x, double y, t_coord *point)
+{
+	if (!point)
+		return ;
+	point->x = x;
+	point->y = y;
+}
 
 int	is_wall_touched(t_coord	*point, char **map, t_player *player)
 {
@@ -24,7 +31,7 @@ int	is_wall_touched(t_coord	*point, char **map, t_player *player)
 	return (0);
 }
 
-t_coord	*depth_horizontal(t_raycast *rcast, t_player *p, char **map)
+void	depth_horizontal(t_raycast *rcast, t_player *p, char **map)
 {
 	double	y_hor;
 	double	x_hor;
@@ -46,7 +53,6 @@ t_coord	*depth_horizontal(t_raycast *rcast, t_player *p, char **map)
 	x_hor = rcast->x + rcast->depth_hor * rcast->cos_angle;
 	rcast->depth_box = dy / rcast->sin_angle;
 	dx = rcast->depth_box * rcast->cos_angle;
-
 	while (rcast->max_steps--)
 	{
 		check = is_wall_touched(&(t_coord){(int) x_hor, (int) y_hor}, map, p);
@@ -58,10 +64,10 @@ t_coord	*depth_horizontal(t_raycast *rcast, t_player *p, char **map)
 		y_hor += dy;
 		rcast->depth_hor += rcast->depth_box;
 	}
-	return (c_point(x_hor, y_hor));
+	edit_point(x_hor, y_hor, rcast->hor);
 }
 
-t_coord	*depth_vertical(t_raycast *rcast, t_player *p, char **map)
+void	depth_vertical(t_raycast *rcast, t_player *p, char **map)
 {
 	double	y_vert;
 	double	x_vert;
@@ -94,7 +100,7 @@ t_coord	*depth_vertical(t_raycast *rcast, t_player *p, char **map)
 		y_vert += dy;
 		rcast->depth_ver += rcast->depth_box;
 	}
-	return (c_point(x_vert, y_vert));
+	edit_point(x_vert, y_vert, rcast->ver);
 }
 
 void	readjust_point(t_coord *point, t_raycast *rcast, int mode)
@@ -118,17 +124,14 @@ void	readjust_point(t_coord *point, t_raycast *rcast, int mode)
 
 t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map)
 {
-	t_coord	*vert;
-	t_coord	*hor;
-	
 	rcast->cos_angle = cos(rcast->angle);
 	rcast->sin_angle = sin(rcast->angle);
 	rcast->x_map = floor(rcast->x);
 	rcast->y_map = floor(rcast->y);
 	if (rcast->angle != 0 && rcast->angle != get_rad(180))
-		hor = depth_horizontal(rcast, p, map);
+		depth_horizontal(rcast, p, map);
 	if (rcast->angle != get_rad(90) && rcast->angle != get_rad(270))
-		vert = depth_vertical(rcast, p, map);
+		depth_vertical(rcast, p, map);
 	if (rcast->angle == 0 || rcast->angle == get_rad(180))
 		rcast->depth_hor = rcast->depth_ver + 1;
 	else if (rcast->angle == get_rad(90) || rcast->angle == get_rad(270))
@@ -136,19 +139,15 @@ t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map)
 	if (rcast->depth_hor > rcast->depth_ver)
 	{
 		rcast->result = rcast->depth_ver;
-		// rcast->result = rcast->result * cos(rcast->angle - p->actual_fov);
-		readjust_point(vert, rcast, 0);
-		// printf("vert x %f y %f d %f angle %f\n", vert->x, vert->y, rcast->result, get_degrees(rcast->angle));
-		// free(hor);
-		return (vert);
+		rcast->result = rcast->result * cos(p->actual_view - rcast->angle);
+		readjust_point(rcast->ver, rcast, 0);
+		return (rcast->ver);
 	}
 	else
 	{
 		rcast->result = rcast->depth_hor;
-		// rcast->result = rcast->result * cos(rcast->angle - p->actual_fov);
-		readjust_point(hor, rcast, 1);
-		// printf("hor x %f y %f d %f angle %f\n", hor->x, hor->y, rcast->result, get_degrees(rcast->angle));
-		// free(vert);
-		return (hor);
+		rcast->result = rcast->result * cos(p->actual_view - rcast->angle);
+		readjust_point(rcast->hor, rcast, 1);
+		return (rcast->hor);
 	}
 }
