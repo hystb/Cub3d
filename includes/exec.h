@@ -9,7 +9,7 @@
 # include "../libs/mlx/mlx.h"
 
 
-# define FOV get_rad(60)
+# define FOV get_rad(120)
 # define SPEED_MOV 0.09
 # define SPEED_CAM 0.04
 # define WIN_TITLE "Cube3D"

@@ -46,6 +46,7 @@ void	render(void *mlx, t_player *p, char **map)
 		if (item_size > p->win_y)
 			item_size = p->win_y;
 		draw_vertical_line(item_size, mlx, get_color(30 * 10, 20, 20), p, i, img);
+		// raycast->angle += atan(p->win_x/2 - (raycast->angle - 0.5));
 		raycast->angle += p->step;
 		i++;
 	}
@@ -107,6 +108,7 @@ int	do_render_loop(t_data_game *data)
 	data->p->map_max_y = get_size_map(0, data->map);
 
 	// this part is to change to fix the little fish eye effect !
+	// data->p->step = atan(tan(FOV / 2) / (data-> p->win_x / 2.0));
 	data->p->step = FOV / data->p->win_x;
 	data->p->screen_ratio = data->p->win_x / 2 / tan(FOV / 2) / data->p->win_x;
 	// end part
