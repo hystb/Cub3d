@@ -24,6 +24,7 @@ void	render(void *mlx, t_player *p, char **map)
 	double		end;
 	double		i;
 
+	// printf("x %f y %f\n", p->position->x, p->position->y);
 	i = 0;
 	raycast = p->rcast;
 	raycast->angle = p->actual_view - FOV / 2;
@@ -35,14 +36,16 @@ void	render(void *mlx, t_player *p, char **map)
 	raycast->y = p->position->y;
 	while (raycast->angle <= end)
 	{	
-		printf("angle %f\n", get_degrees(raycast->angle));
+		raycast->x = p->position->x;
+		raycast->y = p->position->y;
+		// printf("angle %f\n", get_degrees(raycast->angle));
 		touched = ray_length(raycast, p, map);
 		// printf("touche %f %f %f %f\n", touched->x, touched->y, get_distance(p->position, touched), raycast->result);
 		distance = raycast->result;
 		item_size = p->win_y * (p->screen_ratio / distance);
 		if (item_size > p->win_y)
 			item_size = p->win_y;
-		draw_vertical_line(item_size, mlx, get_color(30 * get_face(touched->x, touched->y, map), 20, 20), p, i, img);
+		draw_vertical_line(item_size, mlx, get_color(30 * 10, 20, 20), p, i, img);
 		raycast->angle += p->step;
 		i++;
 	}
@@ -97,8 +100,8 @@ int	do_render_loop(t_data_game *data)
 		free_exec_struct(data->p); // samething but about mlx win here
 	data->p->mlx_win = data->win;
 	data->p->actual_view = 0; // add spawn angle from map reading
-	data->p->position->x = data->spawn[0];
-	data->p->position->y = data->spawn[1];
+	data->p->position->x = data->spawn[1];
+	data->p->position->y = data->spawn[0];
 	data->p->map = data->map;
 	data->p->map_max_x = get_size_map(1, data->map);
 	data->p->map_max_y = get_size_map(0, data->map);

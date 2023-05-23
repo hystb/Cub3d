@@ -19,7 +19,7 @@ int	move(t_player *p, double axisX, double axisY)
 
 	x = p->position->x + axisX * SPEED_MOV;
 	y = p->position->y + axisY * SPEED_MOV;
-	if (p->map[(int) x][(int) y] == '1')
+	if (p->map[(int) y][(int) x] == '1')
 		return (0);
 	else
 	{
