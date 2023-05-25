@@ -6,7 +6,7 @@
 /*   By: ebillon <ebillon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:35:39 by ebillon           #+#    #+#             */
-/*   Updated: 2023/05/22 14:32:16 by ebillon          ###   ########.fr       */
+/*   Updated: 2023/05/25 13:10:05 by ebillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ int	do_render_loop(t_data_game *data)
 	if (malloc_struct(data))
 		free_exec_struct(data->p); // do something else here -> mean that *t_player is not correctly allocated
 	data->p->mlx = data->mlx;
-	data->p->win_x = 1000;
-	data->p->win_y = 800;
+	data->p->win_x = 1500;
+	data->p->win_y = 1200;
 	data->win = mlx_new_window(data->mlx, data->p->win_x, data->p->win_y, WIN_TITLE);
 	if (!data->mlx)
 		free_exec_struct(data->p); // samething but about mlx win here
@@ -116,4 +116,5 @@ int	do_render_loop(t_data_game *data)
 	mlx_hook(data->p->mlx_win, 2, 1L<<0, &action, data->p); // movement, need to add "la croix rouge" to close program
 	render(data->mlx, data->p, data->map);
 	mlx_loop(data->p->mlx);
+	return (0);
 }
