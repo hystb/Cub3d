@@ -2,24 +2,24 @@
 
 static void	is_all_assets(t_data_game data)
 {
-	// if (!data.east || !data.north || !data.south || !data.west)
-	// {
-	// 	if (data.east)
-	// 		mlx_destroy_image(data.mlx, data.east);
-	// 	if (data.west)
-	// 		mlx_destroy_image(data.mlx, data.west);
-	// 	if (data.north)
-	// 		mlx_destroy_image(data.mlx, data.north);
-	// 	if (data.south)
-	// 		mlx_destroy_image(data.mlx, data.south);
-	// 	mlx_destroy_display(data.mlx);
-	// 	free(data.mlx);
-	// 	free_map(data.all_readed);
-	// 	ft_putstr_fd(ERR_ASSET, STDERR_FILENO);
-	// 	exit (1);
-	// }
-	// if (data.is_floor == 0 || data.is_roof == 0)
-	// 	clean_data(data, ERR_RGB);
+	if (!data.east || !data.north || !data.south || !data.west)
+	{
+		if (data.east)
+			mlx_destroy_image(data.mlx, data.east);
+		if (data.west)
+			mlx_destroy_image(data.mlx, data.west);
+		if (data.north)
+			mlx_destroy_image(data.mlx, data.north);
+		if (data.south)
+			mlx_destroy_image(data.mlx, data.south);
+		mlx_destroy_display(data.mlx);
+		free(data.mlx);
+		free_map(data.all_readed);
+		ft_putstr_fd(ERR_ASSET, STDERR_FILENO);
+		exit (1);
+	}
+	if (data.is_floor == 0 || data.is_roof == 0)
+		clean_data(data, ERR_RGB);
 }
 
 static void	is_correct_char(char **map, int i, int j, t_data_game *data)

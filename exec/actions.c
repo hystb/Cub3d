@@ -63,4 +63,5 @@ int	action(int keycode, t_player *p)
 		return (move(p, cos(p->actual_view - get_rad(90)), sin(p->actual_view) - get_rad(90)));
 	else if (keycode == 100)
 		return (move(p, cos(p->actual_view + get_rad(90)), sin(p->actual_view) + get_rad(90)));
+	return (0);
 }

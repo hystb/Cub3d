@@ -21,16 +21,6 @@ int	is_whole_number(double e)
 	return (0);
 }
 
-double	get_distance(t_coord *a, t_coord *b)
-{
-	double	distance;
-	t_coord	init;
-	int		face;
-	
-	distance = sqrt(pow((b->x - a->x), 2) + pow((b->y - a->y), 2));
-	return (distance);
-}
-
 double	get_rad(double angle)
 {
 	return (angle * M_PI / 180);

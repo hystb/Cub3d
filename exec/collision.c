@@ -20,22 +20,27 @@ int	is_block(int x, int y, char **map)
 	return (0);
 }
 
-int	get_face(double x, double y, char **map)
+int	get_face(t_coord *c, t_raycast *rc)
 {
+	double	x;
+	double	y;
+
+	x = c->x;
+	y = c->y;
 	if (!is_whole_number(y) && !is_whole_number(x))
 		return (0);
 	if (is_whole_number(y))
 	{
-		if (is_block(x, floor(y) - 1, map))
+		if (rc->sin_angle < 0)
 			return (3);
-		else if (is_block(x, floor(y) + 1, map))
+		else
 			return (1);
 	}
 	else
 	{
-		if (is_block(floor(x) - 1, y, map))
+		if (rc->cos_angle > 0)
 			return (2);
-		else if (is_block(floor(x) + 1, y, map))
+		else
 			return (4);
 	}
 	return (0);

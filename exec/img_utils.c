@@ -27,24 +27,34 @@ int	get_color(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
+float	get_perc_face(int face, t_coord *point)
+{
+	if (face == 1 || face == 3)
+	{
+		return (point->x - (int)(point->x));
+		// x interessant
+	}
+	else
+	{
+		return (point->y - (int)(point->y));
+		// y interesant
+	}
+}
 
 // la face touche, taille de l'objet et quel pixel on est, les coordonnes de la face (si 59.61 -> 0.61), 
-void	draw_vertical_line(int height, void *mlx, int color, t_player *p, int i_img, t_imgdata *img)
+void	draw_vertical_line(t_data_game *data, int size, int x_img, int face)
 {
-	int			i;
+	t_coord		*point;
+	int			y;
 	int			start;
-	int			c_bottom;
-	int			c_top;
-	
-	c_bottom = get_color(50, 0, 100);
-	c_top = get_color(0, 100, 25);
 
-	i = 0;
-	start = floor(p->win_y / 2 - height / 2);
-	while (i < start)
-		set_pixel_img(img, i_img, i++, c_bottom);
-	while (i < start + height)
-		set_pixel_img(img, i_img, i++, color);
-	while (i < p->win_y)
-		set_pixel_img(img, i_img, i++, c_top);
+	point = data->p->rcast->target;
+	y = -1;
+	start = floor(data->p->win_y / 2 - size / 2);
+	while (++y < start)
+		set_pixel_img(data->p->rcast->imgdata, x_img, y, data->p->floor_c);
+	while (++y < start + size)
+		set_pixel_img(data->p->rcast->imgdata, x_img, y, get_texture(face, size, y, get_perc_face(face, point)));
+	while (++y < data->p->win_y)
+		set_pixel_img(data->p->rcast->imgdata, x_img, y, data->p->roof_c);
 }

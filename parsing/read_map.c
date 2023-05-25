@@ -17,7 +17,7 @@ static void	fill_img(void **img, char *str, t_data_game data)
 	while (str[i] && str[i] != '\n')
 		i++;
 	str[i] = '\0';
-	// *img = mlx_xpm_file_to_image(data.mlx, str, &width, &height);
+	*img = mlx_xpm_file_to_image(data.mlx, str, &width, &height);
 	str[i] = '\n';
 	str = tmp;
 	return ;
