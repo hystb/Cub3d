@@ -1,24 +1,30 @@
 #---------------------------------------------------#
 CC 			= cc
 
-CFLAGS 		= -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS 		= -fsanitize=address -g3 -Wall -Wextra -Werror
 
-MLXFLAGS	= -L/libs/mlx -Imlx_linux -lXext -lX11 -lm -lz #-ldl -lglfw -pthread -lm 
+MLXFLAGS	= -L/libs/mlx -Imlx_linux -lXext -lX11 -lm -lz
 
 NAME 		= cub3D
 #---------------------------------------------------#
 OBJ_DIR 	= obj/
 
 SRCS		= \
-exec/exec.c\
+exec/actions.c\
 exec/collision.c\
+exec/exec.c\
+exec/img_utils.c\
 exec/math_utils.c\
-exec/raylenght.c\
+exec/raylength.c\
+exec/texture.c\
+exec/utils.c\
+exit/exit_exec.c\
+exit/exit_parsing.c\
+parsing/parsing_map.c\
 parsing/parsing_utils.c\
 parsing/read_map.c\
-parsing/parsing_map.c\
-exit/exit_parsing.c\
 error/error_parsing.c\
+main.c
 
 OBJ_DIR 	= .obj
 

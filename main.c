@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "includes/parsing.h"
+#include "includes/exec.h"
 
 int	main(int argc, char **argv)
 {
@@ -27,6 +28,7 @@ int	main(int argc, char **argv)
 	pars_map(&data);
 	while (data.map[i++])
 		printf("%s", data.map[i - 1]);
+	do_render_loop(&data);
 	clean_data(data, NULL);
 	return (0);
 }
