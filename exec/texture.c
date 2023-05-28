@@ -16,7 +16,6 @@ static u_int32_t	*get_texture_data(int face, t_data_game *data)
 	else
 		sprite = data->west;
 	return ((u_int32_t *) mlx_get_data_addr(sprite, &bpp, &size_line, &endian));
-
 }
 
 int	get_texture(int face, int size, int pixel_y, float percentage_face, t_data_game *data)
@@ -34,4 +33,3 @@ int	get_texture(int face, int size, int pixel_y, float percentage_face, t_data_g
 	color = src[pixel];
 	return (color);
 }
-
