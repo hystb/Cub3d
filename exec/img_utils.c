@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../includes/exec.h"
 
 void set_pixel_img(t_imgdata *img, int x, int y, int color)
@@ -30,15 +28,9 @@ int	get_color(int r, int g, int b)
 float	get_perc_face(int face, t_coord *point)
 {
 	if (face == 1 || face == 3)
-	{
 		return (point->x - (int)(point->x));
-		// x interessant
-	}
 	else
-	{
 		return (point->y - (int)(point->y));
-		// y interesant
-	}
 }
 
 // la face touche, taille de l'objet et quel pixel on est, les coordonnes de la face (si 59.61 -> 0.61), 

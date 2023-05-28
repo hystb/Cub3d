@@ -68,12 +68,15 @@ int	action_move(int keycode, t_player *p)
 	else if (keycode == 65363)
 		return (cam_move(p, 1));
 	else if (keycode == 115)
-		return (move(p, m_cos(p->actual_view + get_rad(180)), m_sin(p->actual_view + get_rad(180))));
+		return (move(p, m_cos(p->actual_view + get_rad(180)), \
+			m_sin(p->actual_view + get_rad(180))));
 	else if (keycode == 119)
 		return (move(p, cos(p->actual_view), sin(p->actual_view)));
 	else if (keycode == 97)
-		return (move(p, m_cos(p->actual_view - get_rad(90)), m_sin(p->actual_view - get_rad(90))));
+		return (move(p, m_cos(p->actual_view - get_rad(90)), \
+			m_sin(p->actual_view - get_rad(90))));
 	else if (keycode == 100)
-		return (move(p, m_cos(p->actual_view + get_rad(90)), m_sin(p->actual_view + get_rad(90))));
+		return (move(p, m_cos(p->actual_view + get_rad(90)), \
+			m_sin(p->actual_view + get_rad(90))));
 	return (0);
 }
