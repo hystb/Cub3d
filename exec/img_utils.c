@@ -54,7 +54,7 @@ void	draw_vertical_line(t_data_game *data, int size, int x_img, int face)
 	while (++y < start)
 		set_pixel_img(data->p->rcast->imgdata, x_img, y, data->p->floor_c);
 	while (++y < start + size)
-		set_pixel_img(data->p->rcast->imgdata, x_img, y, get_texture(face, size, y, get_perc_face(face, point), data));
+		set_pixel_img(data->p->rcast->imgdata, x_img, y, get_texture(face, size, y - start, get_perc_face(face, point), data));
 	while (++y < data->p->win_y)
 		set_pixel_img(data->p->rcast->imgdata, x_img, y, data->p->roof_c);
 }

@@ -1,5 +1,7 @@
 #include "../includes/exec.h"
 
+
+// pour les textures c'est 1 nord, 2 est, 3 sud, 4 ouest
 int	get_texture(int face, int size, int pixel_y, float percentage_face, t_data_game *data)
 {
 	u_int32_t	color;
@@ -14,7 +16,7 @@ int	get_texture(int face, int size, int pixel_y, float percentage_face, t_data_g
 	f = data->south;
 	if (face == 1)
 	{
-		f = data->south;
+		f = data->north;
 	}
 	else if (face == 2)
 	{
@@ -22,7 +24,7 @@ int	get_texture(int face, int size, int pixel_y, float percentage_face, t_data_g
 	}
 	else if (face == 3)
 	{
-		f = data->north;
+		f = data->south;
 	}
 	else
 	{
