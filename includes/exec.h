@@ -74,7 +74,9 @@ int		get_face(t_coord *c, t_raycast *rc);
 /* mlx	*/
 void	draw_vertical_line(t_data_game *data, int size, int x_img, int face);
 int		get_color(int r, int g, int b);
-int		action(int keycode, t_player *player);
+int		action_move(int keycode, t_player *player);
+int		action_cam(int keycode, t_player *player);
+
 
 /* math tools */
 double 	get_rad(double angle);

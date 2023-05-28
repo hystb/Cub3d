@@ -57,7 +57,7 @@ double	m_cos(double angle)
 }
 
 
-int	action(int keycode, t_player *p)
+int	action_move(int keycode, t_player *p)
 {
 	if (keycode == 65307)
 	{

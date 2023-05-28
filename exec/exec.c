@@ -106,7 +106,7 @@ int	do_render_loop(t_data_game *data)
 	data->p->screen_ratio = (data->p->win_x / 2) / tan(FOV / 2);
 	// end part
 
-	mlx_hook(data->p->mlx_win, 2, 1L<<0, &action, data->p); // movement, need to add "la croix rouge" to close program
+	mlx_hook(data->p->mlx_win, 2, 1L<<0, &action_move, data->p); // movement, need to add "la croix rouge" to close program
 	render(data->mlx, data->p, data->map);
 	mlx_loop(data->p->mlx);
 	return (0);
