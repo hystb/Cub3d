@@ -1,44 +1,37 @@
 #include "../includes/exec.h"
 
+static u_int32_t	*get_texture_data(int face, t_data_game *data)
+{
+	t_img	*sprite;
+	int		bpp;
+	int		size_line;
+	int		endian;
 
-// pour les textures c'est 1 nord, 2 est, 3 sud, 4 ouest
+	if (face == 3)
+		sprite = data->south;
+	else if (face == 2)
+		sprite = data->east;
+	else if (face == 1)
+		sprite = data->north;
+	else
+		sprite = data->west;
+	return ((u_int32_t *) mlx_get_data_addr(sprite, &bpp, &size_line, &endian));
+
+}
+
 int	get_texture(int face, int size, int pixel_y, float percentage_face, t_data_game *data)
 {
 	u_int32_t	color;
-	t_img		*f;
 	int			pixel;
-	int			a;
-	int			b;
-	int			c;
 	u_int32_t	y;
 	u_int32_t	x;
+	u_int32_t	*src;
 
-	f = data->south;
-	if (face == 1)
-	{
-		f = data->north;
-	}
-	else if (face == 2)
-	{
-		f = data->east;
-	}
-	else if (face == 3)
-	{
-		f = data->south;
-	}
-	else
-	{
-		f = data->west;
-	}
-	
-	u_int32_t *src = (u_int32_t *)mlx_get_data_addr(f, &a, &b, &c);
+	src = get_texture_data(face, data);
 	x = percentage_face * 256;
 	y = 256 / size * pixel_y * 256;
 	pixel = x + y;
-	if (pixel > (256 * 256))
-		color = 16777215;
-	else
-		color = src[pixel];
-
-	return (color); // a remplacer par ton truc;
+	color = src[pixel];
+	return (color);
 }
+
