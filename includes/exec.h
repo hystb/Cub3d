@@ -7,6 +7,7 @@
 # include "parsing.h"
 # include "../libs/libft/libft.h"
 # include "../libs/mlx/mlx.h"
+# include "../libs/mlx/mlx_int.h"
 
 
 # define FOV get_rad(70)
@@ -87,7 +88,7 @@ void	edit_point(double x, double y, t_coord *point);
 void	render(void *mlx, t_player *p, char **map);
 t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map);
 int		do_render_loop(struct s_game_data *data);
-int		get_texture(int face, int size, int pixel_y, float percentage_face);
+int		get_texture(int face, int size, int pixel_y, float percentage_face, t_data_game *data);
 
 /* utils */
 void	ft_free(void *ptr);
