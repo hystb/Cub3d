@@ -32,9 +32,9 @@ int	get_face(t_coord *c, t_raycast *rc)
 	if (is_whole_number(y))
 	{
 		if (rc->sin_angle < 0)
-			return (3);
-		else
 			return (1);
+		else
+			return (3);
 	}
 	else
 	{

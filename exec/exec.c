@@ -79,6 +79,18 @@ int	get_size_map(int mode, char **map)
 	}
 }
 
+double	get_spawn_view(int e)
+{
+	if (e == 'N')
+		return (get_rad(270));
+	else if (e == 'E')
+		return (0);
+	else if (e == 'S')
+		return (get_rad(90));
+	else
+		return (get_rad(180));
+}
+
 int	do_render_loop(t_data_game *data)
 {
 	if (malloc_struct(data))
@@ -92,7 +104,7 @@ int	do_render_loop(t_data_game *data)
 	if (!data->mlx || !data->p->rcast->imgdata->img)
 		free_exec_struct(data->p); // samething but about mlx win here
 	data->p->mlx_win = data->win;
-	data->p->actual_view = 0; // add spawn angle from map reading
+	data->p->actual_view = get_spawn_view(data->spawn[2]); // add spawn angle from map reading
 	data->p->position->x = data->spawn[1];
 	data->p->position->y = data->spawn[0];
 	data->p->map = data->map;
