@@ -10,8 +10,8 @@
 
 
 # define FOV get_rad(80)
-# define SPEED_MOV 0.09
-# define SPEED_CAM 0.04
+# define SPEED_MOV 0.2
+# define SPEED_CAM 0.1
 # define WIN_TITLE "Cube3D"
 
 typedef struct s_coord
