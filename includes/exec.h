@@ -9,7 +9,7 @@
 # include "../libs/mlx/mlx.h"
 
 
-# define FOV get_rad(70)
+# define FOV get_rad(80)
 # define SPEED_MOV 0.09
 # define SPEED_CAM 0.04
 # define WIN_TITLE "Cube3D"
@@ -41,7 +41,6 @@ typedef struct s_raycast
 	double	y_map;
 	double	sin_angle;
 	double	cos_angle;
-	double	angle_view;
 	double	angle;
 	double	depth_hor;
 	double	depth_ver;
