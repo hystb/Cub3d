@@ -18,9 +18,9 @@ void	render(void *mlx, t_player *p, char **map)
 	t_raycast 	*rc;
 	t_imgdata	*img;
 	double		item_size;
-	double		i;
+	int			x;
 
-	i = 0;
+	x = 0;
 	rc = p->rcast;
 	rc->angle = p->actual_view - FOV / 2;
 	rc->end = rc->angle + FOV;
@@ -28,17 +28,17 @@ void	render(void *mlx, t_player *p, char **map)
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->size_line, &img->endian);
 	if (!img->addr)
 		return ; // do something here
-	while (rc->angle <= rc->end)
+	while (x < p->win_x)
 	{	
 		rc->x = p->position->x;
 		rc->y = p->position->y;
 		rc->target = ray_length(rc, p, map);
-		item_size = p->win_y * (p->screen_ratio / rc->result);
+		item_size = p->screen_ratio / rc->result;
 		if (item_size > p->win_y)
 			item_size = p->win_y;
-		draw_vertical_line(p->game, item_size, i, get_face(rc->target, rc));
-		rc->angle += p->step;
-		i++;
+		draw_vertical_line(p->game, item_size, x, get_face(rc->target, rc));
+		x++;
+		rc->angle = atan((x + 0.00001 - p->win_x / 2) / (p->screen_ratio)) + (p->actual_view);
 	}
 	mlx_put_image_to_window(mlx, p->mlx_win, img->img, 0, 0);
 }
@@ -85,8 +85,8 @@ int	do_render_loop(t_data_game *data)
 		free_exec_struct(data->p); // do something else here -> mean that *t_player is not correctly allocated
 	data->p->game = data;
 	data->p->mlx = data->mlx;
-	data->p->win_x = 800;
-	data->p->win_y = 500;
+	data->p->win_x = 1000;
+	data->p->win_y = 800;
 	data->p->rcast->imgdata->img = mlx_new_image(data->mlx, data->p->win_x, data->p->win_y);
 	data->win = mlx_new_window(data->mlx, data->p->win_x, data->p->win_y, WIN_TITLE);
 	if (!data->mlx || !data->p->rcast->imgdata->img)
@@ -101,13 +101,12 @@ int	do_render_loop(t_data_game *data)
 	data->p->floor_c = get_color(data->floor[0], data->floor[1], data->floor[2]);
 	data->p->roof_c = get_color(data->roof[0], data->roof[1], data->roof[2]);
 
-	// this part is to change to fix the little fish eye effect !
-	// data->p->step = atan(tan(FOV / 2) / (data-> p->win_x / 2.0));
+	// this part is to change to fix the little distortion effect !
 	data->p->step = FOV / data->p->win_x;
-	data->p->screen_ratio = data->p->win_x / 2 / tan(FOV / 2) / data->p->win_x;
+	data->p->screen_ratio = (data->p->win_x / 2) / tan(FOV / 2);
 	// end part
 
-	mlx_hook(data->p->mlx_win, 2, 1L<<0, &action, data->p); // movement, need to add "la croix rouge" to close program
+	mlx_hook(data->p->mlx_win, 2, 1L<<0, &action_move, data->p); // movement, need to add "la croix rouge" to close program
 	render(data->mlx, data->p, data->map);
 	mlx_loop(data->p->mlx);
 	return (0);

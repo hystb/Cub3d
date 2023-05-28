@@ -10,9 +10,9 @@
 # include "../libs/mlx/mlx_int.h"
 
 
-# define FOV get_rad(70)
-# define SPEED_MOV 0.09
-# define SPEED_CAM 0.04
+# define FOV get_rad(80)
+# define SPEED_MOV 0.2
+# define SPEED_CAM 0.1
 # define WIN_TITLE "Cube3D"
 
 typedef struct s_coord
@@ -42,7 +42,6 @@ typedef struct s_raycast
 	double	y_map;
 	double	sin_angle;
 	double	cos_angle;
-	double	angle_view;
 	double	angle;
 	double	depth_hor;
 	double	depth_ver;
@@ -76,7 +75,9 @@ int		get_face(t_coord *c, t_raycast *rc);
 /* mlx	*/
 void	draw_vertical_line(t_data_game *data, int size, int x_img, int face);
 int		get_color(int r, int g, int b);
-int		action(int keycode, t_player *player);
+int		action_move(int keycode, t_player *player);
+int		action_cam(int keycode, t_player *player);
+
 
 /* math tools */
 double 	get_rad(double angle);
