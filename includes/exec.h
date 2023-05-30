@@ -63,8 +63,6 @@ typedef struct s_player
 	int					win_y;
 	int					floor_c;
 	int					roof_c;
-	int					map_max_x;
-	int					map_max_y;
 }				t_player;
 
 /* collisions */

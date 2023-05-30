@@ -59,23 +59,11 @@ int	malloc_struct(t_data_game *data)
 	if (!data->p || !data->p->position || !data->p->rcast || \
 	!data->p->rcast->hor || !data->p->rcast->ver || !data->p->rcast->imgdata)
 		return (free_exec_struct(data->p), 1);
+	data->p->mlx = data->mlx;
+	data->p->game = data;
+	data->p->win_x = 1000;
+	data->p->win_y = 800;
 	return (0);
-}
-
-/* 1 == width | 0 heigth */
-int	get_size_map(int mode, char **map)
-{
-	int	i;
-
-	if (mode)
-		return (ft_strlen(map[0]));
-	else
-	{
-		i = 0;
-		while (map[i])
-			i++;
-		return (i);
-	}
 }
 
 double	get_spawn_view(int e)
@@ -94,10 +82,6 @@ int	do_render_loop(t_data_game *dg)
 {
 	if (malloc_struct(dg))
 		free_exec_struct(dg->p); // do something else here -> mean that *t_player is not correctly allocated
-	dg->p->game = dg;
-	dg->p->mlx = dg->mlx;
-	dg->p->win_x = 1000;
-	dg->p->win_y = 800;
 	dg->p->rcast->imgdata->img = mlx_new_image(dg->mlx, \
 	dg->p->win_x, dg->p->win_y);
 	dg->win = mlx_new_window(dg->mlx, dg->p->win_x, \
@@ -109,8 +93,6 @@ int	do_render_loop(t_data_game *dg)
 	dg->p->position->x = dg->spawn[1];
 	dg->p->position->y = dg->spawn[0];
 	dg->p->map = dg->map;
-	dg->p->map_max_x = get_size_map(1, dg->map);
-	dg->p->map_max_y = get_size_map(0, dg->map);
 	dg->p->floor_c = get_color(dg->floor[0], dg->floor[1], dg->floor[2]);
 	dg->p->roof_c = get_color(dg->roof[0], dg->roof[1], dg->roof[2]);
 	dg->p->screen_ratio = (dg->p->win_x / 2) / tan(FOV / 2);
