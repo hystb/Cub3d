@@ -15,7 +15,7 @@
 
 void	render(void *mlx, t_player *p, char **map)
 {
-	t_raycast 	*rc;
+	t_raycast	*rc;
 	t_imgdata	*img;
 	double		item_size;
 	int			x;
@@ -23,22 +23,21 @@ void	render(void *mlx, t_player *p, char **map)
 	x = 0;
 	rc = p->rcast;
 	rc->angle = p->actual_view - FOV / 2;
-	rc->end = rc->angle + FOV;
 	img = rc->imgdata;
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->size_line, &img->endian);
+	img->addr = mlx_get_data_addr(img->img, \
+		&img->bits_per_pixel, &img->size_line, &img->endian);
 	if (!img->addr)
-		return ; // do something here
+		return (free_exec_struct(p));
 	while (x < p->win_x)
 	{	
 		rc->x = p->position->x;
 		rc->y = p->position->y;
 		rc->target = ray_length(rc, p, map);
 		item_size = p->screen_ratio / rc->result;
-		if (item_size > p->win_y)
-			item_size = p->win_y;
 		draw_vertical_line(p->game, item_size, x, get_face(rc->target, rc));
 		x++;
-		rc->angle = atan((x + 0.00001 - p->win_x / 2) / (p->screen_ratio)) + (p->actual_view);
+		rc->angle = atan((x + 0.00001 - p->win_x / 2) / \
+		(p->screen_ratio)) + (p->actual_view);
 	}
 	mlx_put_image_to_window(mlx, p->mlx_win, img->img, 0, 0);
 }
@@ -91,35 +90,32 @@ double	get_spawn_view(int e)
 		return (get_rad(180));
 }
 
-int	do_render_loop(t_data_game *data)
+int	do_render_loop(t_data_game *dg)
 {
-	if (malloc_struct(data))
-		free_exec_struct(data->p); // do something else here -> mean that *t_player is not correctly allocated
-	data->p->game = data;
-	data->p->mlx = data->mlx;
-	data->p->win_x = 1000;
-	data->p->win_y = 800;
-	data->p->rcast->imgdata->img = mlx_new_image(data->mlx, data->p->win_x, data->p->win_y);
-	data->win = mlx_new_window(data->mlx, data->p->win_x, data->p->win_y, WIN_TITLE);
-	if (!data->mlx || !data->p->rcast->imgdata->img)
-		free_exec_struct(data->p); // samething but about mlx win here
-	data->p->mlx_win = data->win;
-	data->p->actual_view = get_spawn_view(data->spawn[2]); // add spawn angle from map reading
-	data->p->position->x = data->spawn[1];
-	data->p->position->y = data->spawn[0];
-	data->p->map = data->map;
-	data->p->map_max_x = get_size_map(1, data->map);
-	data->p->map_max_y = get_size_map(0, data->map);
-	data->p->floor_c = get_color(data->floor[0], data->floor[1], data->floor[2]);
-	data->p->roof_c = get_color(data->roof[0], data->roof[1], data->roof[2]);
-
-	// this part is to change to fix the little distortion effect !
-	data->p->step = FOV / data->p->win_x;
-	data->p->screen_ratio = (data->p->win_x / 2) / tan(FOV / 2);
-	// end part
-
-	mlx_hook(data->p->mlx_win, 2, 1L<<0, &action_move, data->p); // movement, need to add "la croix rouge" to close program
-	render(data->mlx, data->p, data->map);
-	mlx_loop(data->p->mlx);
+	if (malloc_struct(dg))
+		free_exec_struct(dg->p); // do something else here -> mean that *t_player is not correctly allocated
+	dg->p->game = dg;
+	dg->p->mlx = dg->mlx;
+	dg->p->win_x = 1000;
+	dg->p->win_y = 800;
+	dg->p->rcast->imgdata->img = mlx_new_image(dg->mlx, \
+	dg->p->win_x, dg->p->win_y);
+	dg->win = mlx_new_window(dg->mlx, dg->p->win_x, \
+	dg->p->win_y, WIN_TITLE);
+	if (!dg->mlx || !dg->p->rcast->imgdata->img)
+		free_exec_struct(dg->p);
+	dg->p->mlx_win = dg->win;
+	dg->p->actual_view = get_spawn_view(dg->spawn[2]);
+	dg->p->position->x = dg->spawn[1];
+	dg->p->position->y = dg->spawn[0];
+	dg->p->map = dg->map;
+	dg->p->map_max_x = get_size_map(1, dg->map);
+	dg->p->map_max_y = get_size_map(0, dg->map);
+	dg->p->floor_c = get_color(dg->floor[0], dg->floor[1], dg->floor[2]);
+	dg->p->roof_c = get_color(dg->roof[0], dg->roof[1], dg->roof[2]);
+	dg->p->screen_ratio = (dg->p->win_x / 2) / tan(FOV / 2);
+	mlx_hook(dg->p->mlx_win, 2, 1L<<0, &action_move, dg->p); // movement, need to add "la croix rouge" to close program
+	render(dg->mlx, dg->p, dg->map);
+	mlx_loop(dg->p->mlx);
 	return (0);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebillon <ebillon@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/22 13:35:39 by ebillon           #+#    #+#             */
+/*   Updated: 2023/05/25 13:10:05 by ebillon          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/exec.h"
 
 static u_int32_t	*get_texture_data(int face, t_data_game *data)
@@ -18,6 +30,11 @@ static u_int32_t	*get_texture_data(int face, t_data_game *data)
 	return ((u_int32_t *) mlx_get_data_addr(sprite, &bpp, &size_line, &endian));
 }
 
+int	get_color(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
+}
+
 int	get_texture(int face, int size, int pixel_y, float percentage_face, t_data_game *data)
 {
 	u_int32_t	color;
@@ -28,7 +45,7 @@ int	get_texture(int face, int size, int pixel_y, float percentage_face, t_data_g
 
 	src = get_texture_data(face, data);
 	x = percentage_face * 256;
-	y = 256 / size * pixel_y * 256;
+	y = (256 * pixel_y) / size * 256;
 	pixel = x + y;
 	color = src[pixel];
 	return (color);

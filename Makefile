@@ -11,11 +11,10 @@ OBJ_DIR 	= obj/
 
 SRCS		= \
 exec/actions.c\
-exec/collision.c\
 exec/exec.c\
 exec/img_utils.c\
-exec/math_utils.c\
-exec/raylength.c\
+exec/ray_depth.c\
+exec/rays.c\
 exec/texture.c\
 exec/utils.c\
 exit/exit_exec.c\

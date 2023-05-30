@@ -12,7 +12,7 @@
 
 #include "../includes/exec.h"
 
-int	move(t_player *p, double axisX, double axisY)
+static int	move(t_player *p, double axisX, double axisY)
 {
 	double	x;
 	double	y;
@@ -30,7 +30,7 @@ int	move(t_player *p, double axisX, double axisY)
 	}
 }
 
-int	cam_move(t_player *p, double value)
+static int	cam_move(t_player *p, double value)
 {
 	double	final_view;
 
@@ -44,18 +44,17 @@ int	cam_move(t_player *p, double value)
 	return (0);
 }
 
-double	m_sin(double angle)
+static double	m_sin(double angle)
 {
 	angle += M_PI * 2;
 	return (sin(fmod(angle, M_PI * 2)));
 }
 
-double	m_cos(double angle)
+static double	m_cos(double angle)
 {
 	angle += M_PI * 2;
 	return (cos(fmod(angle, M_PI * 2)));
 }
-
 
 int	action_move(int keycode, t_player *p)
 {
