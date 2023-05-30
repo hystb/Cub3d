@@ -41,12 +41,31 @@ void	draw_vertical_line(t_data_game *data, int size, int x_img, int face)
 	int			start;
 
 	point = data->p->rcast->target;
-	y = -1;
-	start = floor(data->p->win_y / 2 - size / 2);
-	while (++y < start)
-		set_pixel_img(data->p->rcast->imgdata, x_img, y, data->p->floor_c);
-	while (++y < start + size)
-		set_pixel_img(data->p->rcast->imgdata, x_img, y, get_texture(face, size, y - start, get_perc_face(face, point), data));
-	while (++y < data->p->win_y)
-		set_pixel_img(data->p->rcast->imgdata, x_img, y, data->p->roof_c);
+	if (size > data->p->win_y)
+	{
+		start = (size - data->p->win_y) / 2;
+		y = -1;
+		while (y++ < data->p->win_y)
+			set_pixel_img(data->p->rcast->imgdata, x_img, y, \
+			get_texture(face, size, start++, get_perc_face(face, point), data));	
+	}
+	else
+	{
+		y = 0;
+		start = floor(data->p->win_y / 2 - size / 2);
+		while (y < data->p->win_y)
+		{
+			if (y < start)
+				set_pixel_img(data->p->rcast->imgdata, x_img, y, data->p->floor_c);
+			else if (y >= start && y < start + size)
+			{
+				set_pixel_img(data->p->rcast->imgdata, x_img, y, \
+				get_texture(face, size, y - start, get_perc_face(face, \
+				point), data));
+			}
+			else
+				set_pixel_img(data->p->rcast->imgdata, x_img, y, data->p->roof_c);
+			y++;
+		}
+	}
 }

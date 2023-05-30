@@ -15,7 +15,7 @@
 
 void	render(void *mlx, t_player *p, char **map)
 {
-	t_raycast 	*rc;
+	t_raycast	*rc;
 	t_imgdata	*img;
 	double		item_size;
 	int			x;
@@ -25,7 +25,8 @@ void	render(void *mlx, t_player *p, char **map)
 	rc->angle = p->actual_view - FOV / 2;
 	rc->end = rc->angle + FOV;
 	img = rc->imgdata;
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->size_line, &img->endian);
+	img->addr = mlx_get_data_addr(img->img, \
+		&img->bits_per_pixel, &img->size_line, &img->endian);
 	if (!img->addr)
 		return ; // do something here
 	while (x < p->win_x)
@@ -114,7 +115,6 @@ int	do_render_loop(t_data_game *data)
 	data->p->roof_c = get_color(data->roof[0], data->roof[1], data->roof[2]);
 
 	// this part is to change to fix the little distortion effect !
-	data->p->step = FOV / data->p->win_x;
 	data->p->screen_ratio = (data->p->win_x / 2) / tan(FOV / 2);
 	// end part
 

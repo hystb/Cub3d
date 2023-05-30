@@ -56,7 +56,6 @@ double	m_cos(double angle)
 	return (cos(fmod(angle, M_PI * 2)));
 }
 
-
 int	action_move(int keycode, t_player *p)
 {
 	if (keycode == 65307)
