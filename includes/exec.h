@@ -14,12 +14,14 @@
 # define SPEED_CAM 0.15
 # define WIN_TITLE "Cube3D"
 
-typedef struct	s_coord {
+typedef struct s_coord
+{
 	double	x;
 	double	y;
 }				t_coord;
 
-typedef struct	s_imgdata {
+typedef struct s_imgdata
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -29,22 +31,21 @@ typedef struct	s_imgdata {
 
 typedef struct s_raycast
 {
-	t_coord	*hor;
-	t_coord	*ver;
-	t_coord	*target;
-	t_imgdata *imgdata;
-	double	end;
-	double	x;
-	double	y;
-	double	x_map;
-	double	y_map;
-	double	sin_angle;
-	double	cos_angle;
-	double	angle;
-	double	depth_hor;
-	double	depth_ver;
-	double	depth_box;
-	double	result;
+	t_coord		*hor;
+	t_coord		*ver;
+	t_coord		*target;
+	t_imgdata	*imgdata;
+	double		x;
+	double		y;
+	double		x_map;
+	double		y_map;
+	double		sin_angle;
+	double		cos_angle;
+	double		angle;
+	double		depth_hor;
+	double		depth_ver;
+	double		depth_box;
+	double		result;
 }				t_raycast;
 
 typedef struct s_player
@@ -67,7 +68,6 @@ typedef struct s_player
 }				t_player;
 
 /* collisions */
-int		is_wall_touched(t_coord	*point, char **map);
 int		get_face(t_coord *c, t_raycast *rc);
 
 /* mlx	*/
@@ -76,18 +76,18 @@ int		get_color(int r, int g, int b);
 int		action_move(int keycode, t_player *player);
 int		action_cam(int keycode, t_player *player);
 
-
 /* math tools */
-double 	get_rad(double angle);
-int		is_whole_number(double e);
-double	get_degrees(double angle);
+double	get_rad(double angle);
 
 /* raycasting */
-void	edit_point(double x, double y, t_coord *point);
-void	render(void *mlx, t_player *p, char **map);
-t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map);
+double	depth_horizontal(t_raycast *rcast);
+double	depth_vertical(t_raycast *rcast);
+void	reset_coordoonate(t_raycast *rcast, t_coord *actual);
+void	readjust_point(t_coord *point, t_raycast *rcast, int mode);
 int		do_render_loop(struct s_game_data *data);
+void	render(void *mlx, t_player *p, char **map);
 int		get_texture(int face, int size, int pixel_y, float percentage_face, t_data_game *data);
+t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map);
 
 /* utils */
 void	ft_free(void *ptr);

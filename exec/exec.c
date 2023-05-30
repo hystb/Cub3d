@@ -23,12 +23,11 @@ void	render(void *mlx, t_player *p, char **map)
 	x = 0;
 	rc = p->rcast;
 	rc->angle = p->actual_view - FOV / 2;
-	rc->end = rc->angle + FOV;
 	img = rc->imgdata;
 	img->addr = mlx_get_data_addr(img->img, \
 		&img->bits_per_pixel, &img->size_line, &img->endian);
 	if (!img->addr)
-		return ; // do something here
+		return (free_exec_struct(p));
 	while (x < p->win_x)
 	{	
 		rc->x = p->position->x;
@@ -37,7 +36,8 @@ void	render(void *mlx, t_player *p, char **map)
 		item_size = p->screen_ratio / rc->result;
 		draw_vertical_line(p->game, item_size, x, get_face(rc->target, rc));
 		x++;
-		rc->angle = atan((x + 0.00001 - p->win_x / 2) / (p->screen_ratio)) + (p->actual_view);
+		rc->angle = atan((x + 0.00001 - p->win_x / 2) / \
+		(p->screen_ratio)) + (p->actual_view);
 	}
 	mlx_put_image_to_window(mlx, p->mlx_win, img->img, 0, 0);
 }

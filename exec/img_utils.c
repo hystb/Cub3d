@@ -46,7 +46,7 @@ void	draw_vertical_line(t_data_game *data, int size, int x_img, int face)
 		y = -1;
 		while (y++ < data->p->win_y)
 			set_pixel_img(data->p->rcast->imgdata, x_img, y, \
-			get_texture(face, size, start++, get_perc_face(face, point), data));	
+			get_texture(face, size, start++, get_perc_face(face, point), data));
 	}
 	else
 	{
