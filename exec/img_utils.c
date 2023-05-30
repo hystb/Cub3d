@@ -12,12 +12,12 @@
 
 #include "../includes/exec.h"
 
-void set_pixel_img(t_imgdata *img, int x, int y, int color)
+void	set_pixel_img(t_imgdata *img, int x, int y, int color)
 {
 	char	*target;
 
 	target = img->addr + (y * img->size_line + x * (img->bits_per_pixel / 8));
-	*(unsigned int*)target = color;
+	*(unsigned int *) target = color;
 }
 
 int	get_color(int r, int g, int b)
@@ -33,7 +33,6 @@ float	get_perc_face(int face, t_coord *point)
 		return (point->y - (int)(point->y));
 }
 
-// la face touche, taille de l'objet et quel pixel on est, les coordonnes de la face (si 59.61 -> 0.61), 
 void	draw_vertical_line(t_data_game *data, int size, int x_img, int face)
 {
 	t_coord		*point;

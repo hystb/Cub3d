@@ -12,18 +12,6 @@
 
 #include "../includes/exec.h"
 
-t_coord	*c_point(double x, double y)
-{
-	t_coord *point;
-
-	point = malloc(sizeof(t_coord));
-	if (!point)
-		return (NULL);
-	point->x = x;
-	point->y = y;
-	return (point);
-}
-
 void	edit_point(double x, double y, t_coord *point)
 {
 	if (!point)
@@ -90,7 +78,6 @@ void	readjust_point(t_coord *point, t_raycast *rcast, int mode)
 			point->x += 0.0001;	
 	}
 }
-
 
 t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map)
 {

@@ -28,7 +28,7 @@ int	get_texture(int face, int size, int pixel_y, float percentage_face, t_data_g
 
 	src = get_texture_data(face, data);
 	x = percentage_face * 256;
-	y = 256 / size * pixel_y * 256;
+	y = (256 * pixel_y) / size * 256;
 	pixel = x + y;
 	color = src[pixel];
 	return (color);

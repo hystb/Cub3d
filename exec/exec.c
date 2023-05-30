@@ -35,8 +35,6 @@ void	render(void *mlx, t_player *p, char **map)
 		rc->y = p->position->y;
 		rc->target = ray_length(rc, p, map);
 		item_size = p->screen_ratio / rc->result;
-		if (item_size > p->win_y)
-			item_size = p->win_y;
 		draw_vertical_line(p->game, item_size, x, get_face(rc->target, rc));
 		x++;
 		rc->angle = atan((x + 0.00001 - p->win_x / 2) / (p->screen_ratio)) + (p->actual_view);

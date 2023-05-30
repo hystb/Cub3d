@@ -9,16 +9,14 @@
 # include "../libs/mlx/mlx.h"
 # include "../libs/mlx/mlx_int.h"
 
-
-# define FOV get_rad(80)
-# define SPEED_MOV 0.2
-# define SPEED_CAM 0.1
+# define FOV M_PI_2
+# define SPEED_MOV 0.3
+# define SPEED_CAM 0.15
 # define WIN_TITLE "Cube3D"
 
-typedef struct s_coord
-{
-	double x;
-	double y;
+typedef struct	s_coord {
+	double	x;
+	double	y;
 }				t_coord;
 
 typedef struct	s_imgdata {
