@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
+#include "../../includes/exec.h"
 
 static void	set_pix_img(t_imgdata *img, int x, int y, int color)
 {

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
-#include "../includes/parsing.h"
+#include "../../includes/exec.h"
+#include "../../includes/parsing.h"
 
 void	render(void *mlx, t_player *p, char **map)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
+#include "../../includes/exec.h"
 
 static int	is_wall_touched(t_coord	*point, char **map)
 {

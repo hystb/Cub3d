@@ -1,5 +1,5 @@
-#include "../includes/exec.h"
-#include "../includes/parsing.h"
+#include "../../includes/exec.h"
+#include "../../includes/parsing.h"
 
 int	free_exec_struct(t_player *p, t_data_game *data, char *str)
 {

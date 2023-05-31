@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
+#include "../../includes/exec.h"
 
 static u_int32_t	*get_texture_data(int face, t_data_game *data)
 {

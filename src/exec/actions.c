@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
+#include "../../includes/exec.h"
 
 static int	move(t_player *p, double axisX, double axisY)
 {

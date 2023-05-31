@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
+#include "../../includes/exec.h"
 
 static void	edit_point(double x, double y, t_coord *point)
 {

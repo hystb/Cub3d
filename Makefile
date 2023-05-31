@@ -10,18 +10,18 @@ NAME 		= cub3D
 OBJ_DIR 	= obj/
 
 SRCS		= \
-exec/actions.c\
-exec/exec.c\
-exec/img_utils.c\
-exec/ray_depth.c\
-exec/rays.c\
-exec/texture.c\
-exec/utils.c\
-exit/exit_exec.c\
-exit/exit_parsing.c\
-parsing/parsing_map.c\
-parsing/parsing_utils.c\
-parsing/read_map.c\
+src/exec/actions.c\
+src/exec/exec.c\
+src/exec/img_utils.c\
+src/exec/ray_depth.c\
+src/exec/rays.c\
+src/exec/texture.c\
+src/exec/utils.c\
+src/exit/exit_exec.c\
+src/exit/exit_parsing.c\
+src/parsing/parsing_map.c\
+src/parsing/parsing_utils.c\
+src/parsing/read_map.c\
 main.c
 
 OBJ_DIR 	= .obj
