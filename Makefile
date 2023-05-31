@@ -72,5 +72,5 @@ re:	fclean
 	$(MAKE) -C $(MLX_DIR) re
 	$(MAKE) all
 
-.PHONY: all lib fclean fclean re
+.PHONY: all lib fclean re
 #---------------------------------------------------#
