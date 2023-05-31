@@ -19,10 +19,10 @@ int	main(int argc, char **argv)
 	int i = -1;
 
 	if (argc < 2)
-		return (write(STDERR_FILENO, "Error\nNot in off args", 22));
+		return (write(STDERR_FILENO, "Error\nNot in off args\n", 22));
 	//peut-etre a enlever
 	if (argc > 2)
-		return (write(STDERR_FILENO, "Error\nToo much args", 20));
+		return (write(STDERR_FILENO, "Error\nToo much args\n", 20));
 	//-------
 	data = read_map(argv[1], 0, 0);
 	pars_map(&data);

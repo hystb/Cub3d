@@ -59,9 +59,7 @@ static double	m_cos(double angle)
 int	action_move(int keycode, t_player *p)
 {
 	if (keycode == 65307)
-	{
-		// quit;
-	}
+		return (free_exec_struct(p, p->game, NULL));
 	if (keycode == 65361)
 		return (cam_move(p, -1));
 	else if (keycode == 65363)

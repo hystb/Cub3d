@@ -13,6 +13,7 @@
 # define SPEED_MOV 0.3
 # define SPEED_CAM 0.15
 # define WIN_TITLE "Cube3D"
+# define MEMORY_ERR "Memory allocation error !\n"
 
 typedef struct s_coord
 {
@@ -91,6 +92,6 @@ t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map);
 void	ft_free(void *ptr);
 
 /* exit */
-void	free_exec_struct(t_player *p);
+int	free_exec_struct(t_player *p, t_data_game *data, char *str);
 
 #endif

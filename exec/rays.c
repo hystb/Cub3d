@@ -28,7 +28,6 @@ static t_coord	*calc_values(t_raycast *rcast, t_player *p)
 	rcast->x_map = floor(rcast->x);
 	rcast->y_map = floor(rcast->y);
 	rcast->result = 0;
-
 	return (p->position);
 }
 

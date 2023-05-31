@@ -22,8 +22,11 @@ void	clean_data(t_data_game data, char *str)
 	free(data.mlx);
 	free_map(data.all_readed);
 	if (str)
+	{
 		ft_putstr_fd(str, STDERR_FILENO);
-	exit (1);
+		exit(1);
+	}
+	exit(0);
 }
 
 void	free_map(char **map)
