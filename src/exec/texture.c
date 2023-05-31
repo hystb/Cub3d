@@ -50,5 +50,3 @@ int	get_texture(int elems[3], float percentage_face, t_data_game *data)
 	color = src[pixel];
 	return (color);
 }
-
-// int	get_texture(int face, int size, int pixel_y, float percentage_face, t_data_game *data)

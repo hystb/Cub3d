@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/05 13:44:28 by nmilan            #+#    #+#             */
+/*   Updated: 2023/05/05 13:44:30 by nmilan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef EXEC_H
 # define EXEC_H
 
@@ -92,6 +104,6 @@ t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map);
 void	ft_free(void *ptr);
 
 /* exit */
-int	free_exec_struct(t_player *p, t_data_game *data, char *str);
+int		free_exec_struct(t_player *p, t_data_game *data, char *str);
 
 #endif

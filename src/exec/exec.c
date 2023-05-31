@@ -101,7 +101,7 @@ int	do_render_loop(t_data_game *dg)
 	dg->p->floor_c = get_color(dg->floor[0], dg->floor[1], dg->floor[2]);
 	dg->p->roof_c = get_color(dg->roof[0], dg->roof[1], dg->roof[2]);
 	dg->p->screen_ratio = (dg->p->win_x / 2) / tan(FOV / 2);
-	mlx_hook(dg->p->mlx_win, 2, 1L<<0, &action_move, dg->p);
+	mlx_hook(dg->p->mlx_win, 2, 1L << 0, &action_move, dg->p);
 	mlx_hook(dg->p->mlx_win, 17, 0L, &action_kill, dg->p);
 	render(dg->mlx, dg->p, dg->map);
 	mlx_loop(dg->p->mlx);

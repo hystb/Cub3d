@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
+#include "../../includes/exec.h"
 
 void	map_path_is_not_correct(char **map)
 {
 	ft_putstr_fd("Error\nMap path incorrect\n", 2);
 	free_map(map);
-	exit (0);
+	exit(0);
 }
 
 void	clean_data(t_data_game data, char *str)
@@ -26,7 +27,7 @@ void	clean_data(t_data_game data, char *str)
 	mlx_destroy_image(data.mlx, data.north);
 	mlx_destroy_image(data.mlx, data.south);
 	mlx_destroy_display(data.mlx);
-	free(data.mlx);
+	ft_free(data.mlx);
 	free_map(data.all_readed);
 	if (str)
 	{
@@ -43,8 +44,8 @@ void	free_map(char **map)
 	i = 0;
 	while (map[i] != NULL)
 	{
-		free(map[i]);
+		ft_free(map[i]);
 		i++;
 	}
-	free(map);
+	ft_free(map);
 }
