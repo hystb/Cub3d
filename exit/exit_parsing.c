@@ -12,6 +12,13 @@
 
 #include "../includes/parsing.h"
 
+void	map_path_is_not_correct(char **map)
+{
+	ft_putstr_fd("Error\nMap path incorrect\n", 2);
+	free_map(map);
+	exit (0);
+}
+
 void	clean_data(t_data_game data, char *str)
 {
 	mlx_destroy_image(data.mlx, data.east);

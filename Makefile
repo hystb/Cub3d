@@ -22,7 +22,6 @@ exit/exit_parsing.c\
 parsing/parsing_map.c\
 parsing/parsing_utils.c\
 parsing/read_map.c\
-error/error_parsing.c\
 main.c
 
 OBJ_DIR 	= .obj
