@@ -39,7 +39,8 @@ static void	over_flow_line(t_data_game *data, int size, int x_img, int face)
 	y = -1;
 	while (y++ < data->p->win_y)
 		set_pix_img(data->p->rcast->imgdata, x_img, y, \
-		get_texture(face, size, start++, get_perc_face(face, point), data));
+		get_texture((int [3]){face, size, start++}, \
+		get_perc_face(face, point), data));
 }
 
 static void	classic_line(t_data_game *data, int size, int x_img, int face)
@@ -58,7 +59,7 @@ static void	classic_line(t_data_game *data, int size, int x_img, int face)
 			data->p->floor_c);
 		else if (y >= start && y < start + size)
 			set_pix_img(data->p->rcast->imgdata, x_img, y, \
-			get_texture(face, size, y - start, get_perc_face(face, \
+			get_texture((int [3]){face, size, y - start}, get_perc_face(face, \
 			point), data));
 		else
 			set_pix_img(data->p->rcast->imgdata, x_img, y, data->p->roof_c);

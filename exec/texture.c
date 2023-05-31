@@ -35,7 +35,7 @@ int	get_color(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-int	get_texture(int face, int size, int pixel_y, float percentage_face, t_data_game *data)
+int	get_texture(int elems[3], float percentage_face, t_data_game *data)
 {
 	u_int32_t	color;
 	int			pixel;
@@ -43,10 +43,12 @@ int	get_texture(int face, int size, int pixel_y, float percentage_face, t_data_g
 	u_int32_t	x;
 	u_int32_t	*src;
 
-	src = get_texture_data(face, data);
+	src = get_texture_data(elems[0], data);
 	x = percentage_face * 256;
-	y = (256 * pixel_y) / size * 256;
+	y = (256 * elems[2]) / elems[1] * 256;
 	pixel = x + y;
 	color = src[pixel];
 	return (color);
 }
+
+// int	get_texture(int face, int size, int pixel_y, float percentage_face, t_data_game *data)
