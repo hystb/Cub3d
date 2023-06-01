@@ -22,10 +22,12 @@
 # include "../libs/mlx/mlx_int.h"
 
 # define FOV M_PI_2
-# define SPEED_MOV 0.3
-# define SPEED_CAM 0.15
+# define SPEED_MOV 0.13
+# define SPEED_CAM 0.1
 # define WIN_TITLE "Cube3D"
 # define MEMORY_ERR "Memory allocation error !\n"
+# define FALSE 0
+# define TRUE 1
 
 typedef struct s_coord
 {
@@ -76,6 +78,12 @@ typedef struct s_player
 	int					win_y;
 	int					floor_c;
 	int					roof_c;
+	int					m_forward;
+	int					m_backward;
+	int					m_left;
+	int					m_right;
+	int					c_left;
+	int					c_right;
 }				t_player;
 
 /* collisions */
@@ -101,6 +109,12 @@ t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map);
 
 /* utils */
 void	ft_free(void *ptr);
+void	create_mlx_tools(t_data_game *dg);
+
+/* movements */
+void	update_coordonate(t_player *p);
+int		action_press(int keycode, t_player *p);
+int		action_release(int keycode, t_player *p);
 
 /* exit */
 int		free_exec_struct(t_player *p, t_data_game *data, char *str);

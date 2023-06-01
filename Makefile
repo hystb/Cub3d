@@ -1,9 +1,9 @@
 #---------------------------------------------------#
 CC 			= cc
 
-CFLAGS 		= -Wall -Wextra -Werror
+CFLAGS 		= -Wall -Wextra -Werror -O3
 
-MLXFLAGS	= -L/libs/mlx -Imlx_linux -lXext -lX11 -lm -lz
+MLXFLAGS	= -L/libs/mlx -Imlx_linux -lXext -lX11 -lm
 
 NAME 		= cub3D
 #---------------------------------------------------#
@@ -13,6 +13,7 @@ SRCS		= \
 src/exec/actions.c\
 src/exec/exec.c\
 src/exec/img_utils.c\
+src/exec/inits.c\
 src/exec/ray_depth.c\
 src/exec/rays.c\
 src/exec/texture.c\
