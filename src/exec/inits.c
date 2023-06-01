@@ -81,6 +81,6 @@ void	create_mlx_tools(t_data_game *dg)
 	dg->p->rcast->imgdata->img = mlx_new_image(dg->mlx, \
 	dg->p->win_x, dg->p->win_y);
 	if (!dg->mlx || !dg->p->rcast->imgdata->img || !dg->win)
-		free_exec_struct(dg->p, dg, MEMORY_ERR);	
+		free_exec_struct(dg->p, dg, MEMORY_ERR);
 	define_player(dg);
 }
