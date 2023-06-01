@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ebillon <ebillon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:44:28 by nmilan            #+#    #+#             */
-/*   Updated: 2023/05/05 13:44:30 by nmilan           ###   ########.fr       */
+/*   Updated: 2023/06/01 12:32:23 by ebillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (write(STDERR_FILENO, "Error\nNot in off args\n", 22));
-	//peut-etre a enlever
 	if (argc > 2)
 		return (write(STDERR_FILENO, "Error\nToo much args\n", 20));
-	//-------
 	data = read_map(argv[1], 0, 0);
 	pars_map(&data);
 	do_render_loop(&data);

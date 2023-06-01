@@ -6,20 +6,20 @@
 /*   By: ebillon <ebillon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:21:39 by ebillon           #+#    #+#             */
-/*   Updated: 2023/05/25 13:21:40 by ebillon          ###   ########.fr       */
+/*   Updated: 2023/06/01 12:25:50 by ebillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec.h"
 
-static int	is_whole_number(double e)
+static int	is_whole_number(float e)
 {
 	if (e == floor(e))
 		return (1);
 	return (0);
 }
 
-double	get_rad(double angle)
+float	get_rad(float angle)
 {
 	return (angle * M_PI / 180);
 }
@@ -50,8 +50,8 @@ void	readjust_point(t_coord *point, t_raycast *rcast, int mode)
 
 int	get_face(t_coord *c, t_raycast *rc)
 {
-	double	x;
-	double	y;
+	float	x;
+	float	y;
 
 	x = c->x;
 	y = c->y;

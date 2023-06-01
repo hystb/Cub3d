@@ -6,13 +6,13 @@
 /*   By: ebillon <ebillon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:21:08 by ebillon           #+#    #+#             */
-/*   Updated: 2023/05/25 13:21:09 by ebillon          ###   ########.fr       */
+/*   Updated: 2023/06/01 12:25:50 by ebillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec.h"
 
-static void	edit_point(double x, double y, t_coord *point)
+static void	edit_point(float x, float y, t_coord *point)
 {
 	if (!point)
 		return ;
@@ -20,11 +20,11 @@ static void	edit_point(double x, double y, t_coord *point)
 	point->y = y;
 }
 
-double	depth_horizontal(t_raycast *rcast)
+float	depth_horizontal(t_raycast *rcast)
 {
-	double	distance;
-	double	y_hor;
-	double	x_hor;
+	float	distance;
+	float	y_hor;
+	float	x_hor;
 
 	if (rcast->sin_angle > 0)
 		y_hor = (rcast->y_map + 1);
@@ -36,11 +36,11 @@ double	depth_horizontal(t_raycast *rcast)
 	return (distance);
 }
 
-double	depth_vertical(t_raycast *rcast)
+float	depth_vertical(t_raycast *rcast)
 {
-	double	distance;
-	double	y_vert;
-	double	x_vert;
+	float	distance;
+	float	y_vert;
+	float	x_vert;
 
 	if (rcast->cos_angle > 0)
 		x_vert = (rcast->x_map + 1);

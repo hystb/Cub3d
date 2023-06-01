@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ebillon <ebillon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:44:28 by nmilan            #+#    #+#             */
-/*   Updated: 2023/05/05 13:44:30 by nmilan           ###   ########.fr       */
+/*   Updated: 2023/06/01 12:25:50 by ebillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 
 typedef struct s_coord
 {
-	double	x;
-	double	y;
+	float	x;
+	float	y;
 }				t_coord;
 
 typedef struct s_imgdata
@@ -48,17 +48,17 @@ typedef struct s_raycast
 	t_coord		*ver;
 	t_coord		*target;
 	t_imgdata	*imgdata;
-	double		x;
-	double		y;
-	double		x_map;
-	double		y_map;
-	double		sin_angle;
-	double		cos_angle;
-	double		angle;
-	double		depth_hor;
-	double		depth_ver;
-	double		depth_box;
-	double		result;
+	float		x;
+	float		y;
+	float		x_map;
+	float		y_map;
+	float		sin_angle;
+	float		cos_angle;
+	float		angle;
+	float		depth_hor;
+	float		depth_ver;
+	float		depth_box;
+	float		result;
 }				t_raycast;
 
 typedef struct s_player
@@ -69,9 +69,9 @@ typedef struct s_player
 	void				*mlx_win;
 	void				*mlx;
 	char				**map;
-	double				actual_view;
-	double				step;
-	double				screen_ratio;
+	float				actual_view;
+	float				step;
+	float				screen_ratio;
 	int					win_x;
 	int					win_y;
 	int					floor_c;
@@ -88,11 +88,11 @@ int		action_move(int keycode, t_player *player);
 int		action_cam(int keycode, t_player *player);
 
 /* math tools */
-double	get_rad(double angle);
+float	get_rad(float angle);
 
 /* raycasting */
-double	depth_horizontal(t_raycast *rcast);
-double	depth_vertical(t_raycast *rcast);
+float	depth_horizontal(t_raycast *rcast);
+float	depth_vertical(t_raycast *rcast);
 void	reset_coordoonate(t_raycast *rcast, t_coord *actual);
 void	readjust_point(t_coord *point, t_raycast *rcast, int mode);
 int		do_render_loop(struct s_game_data *data);

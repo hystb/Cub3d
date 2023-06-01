@@ -6,16 +6,16 @@
 /*   By: ebillon <ebillon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:35:25 by ebillon           #+#    #+#             */
-/*   Updated: 2023/05/25 13:14:42 by ebillon          ###   ########.fr       */
+/*   Updated: 2023/06/01 12:25:50 by ebillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec.h"
 
-static int	move(t_player *p, double axisX, double axisY)
+static int	move(t_player *p, float axisX, float axisY)
 {
-	double	x;
-	double	y;
+	float	x;
+	float	y;
 
 	x = p->position->x + axisX * SPEED_MOV;
 	y = p->position->y + axisY * SPEED_MOV;
@@ -30,9 +30,9 @@ static int	move(t_player *p, double axisX, double axisY)
 	}
 }
 
-static int	cam_move(t_player *p, double value)
+static int	cam_move(t_player *p, float value)
 {
-	double	final_view;
+	float	final_view;
 
 	final_view = p->actual_view;
 	final_view += value * SPEED_CAM;
@@ -44,13 +44,13 @@ static int	cam_move(t_player *p, double value)
 	return (0);
 }
 
-static double	m_sin(double angle)
+static float	m_sin(float angle)
 {
 	angle += M_PI * 2;
 	return (sin(fmod(angle, M_PI * 2)));
 }
 
-static double	m_cos(double angle)
+static float	m_cos(float angle)
 {
 	angle += M_PI * 2;
 	return (cos(fmod(angle, M_PI * 2)));

@@ -6,7 +6,7 @@
 /*   By: ebillon <ebillon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:35:39 by ebillon           #+#    #+#             */
-/*   Updated: 2023/05/25 13:10:05 by ebillon          ###   ########.fr       */
+/*   Updated: 2023/06/01 12:25:50 by ebillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	render(void *mlx, t_player *p, char **map)
 {
 	t_raycast	*rc;
 	t_imgdata	*img;
-	double		item_size;
+	float		item_size;
 	int			x;
 
 	x = 0;
@@ -61,12 +61,12 @@ static int	malloc_struct(t_data_game *data)
 		return (free_exec_struct(data->p, data, MEMORY_ERR), 1);
 	data->p->mlx = data->mlx;
 	data->p->game = data;
-	data->p->win_x = 1000;
-	data->p->win_y = 800;
+	data->p->win_x = 1920;
+	data->p->win_y = 1080;
 	return (0);
 }
 
-static double	get_spawn_view(int e)
+static float	get_spawn_view(int e)
 {
 	if (e == 'N')
 		return (get_rad(270));

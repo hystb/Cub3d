@@ -1,7 +1,7 @@
 #---------------------------------------------------#
 CC 			= cc
 
-CFLAGS 		= -Wall -Wextra -Werror
+CFLAGS 		= -Wall -Wextra -Werror -O3	//-------
 
 MLXFLAGS	= -L/libs/mlx -Imlx_linux -lXext -lX11 -lm -lz
 
