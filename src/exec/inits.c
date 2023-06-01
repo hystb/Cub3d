@@ -44,9 +44,9 @@ static float	get_spawn_view(int e)
 	else if (e == 'E')
 		return (0 + 0.0001);
 	else if (e == 'S')
-		return (get_rad(90) + 0.0001);
+		return (R_90 + 0.0001);
 	else
-		return (get_rad(180) + 0.0001);
+		return (R_180 + 0.0001);
 }
 
 static void	define_mov_states(t_player *p)

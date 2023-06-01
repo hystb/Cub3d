@@ -22,6 +22,8 @@
 # include "../libs/mlx/mlx_int.h"
 
 # define FOV M_PI_2
+# define R_90 M_PI_2
+# define R_180 M_PI
 # define SPEED_MOV 0.13
 # define SPEED_CAM 0.1
 # define WIN_TITLE "Cube3D"
@@ -42,6 +44,7 @@ typedef struct s_imgdata
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
+	int		ratio_bp;
 }				t_imgdata;
 
 typedef struct s_raycast

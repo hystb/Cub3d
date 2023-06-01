@@ -78,16 +78,16 @@ t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map)
 	actual = calc_values(rcast, p);
 	while (!is_wall_touched(actual, map))
 	{
-		if (rcast->angle == 0 || rcast->angle == get_rad(180))
+		if (rcast->angle == 0 || rcast->angle == R_180)
 			actual = do_only(rcast, 1);
-		if (rcast->angle == get_rad(90) || rcast->angle == get_rad(270))
+		if (rcast->angle == R_90 || rcast->angle == get_rad(270))
 			actual = do_only(rcast, 0);
 		else
 			actual = do_classic(rcast);
 	}
-	if (rcast->angle == 0 || rcast->angle == get_rad(180))
+	if (rcast->angle == 0 || rcast->angle == R_180)
 		readjust_point(actual, rcast, 1);
-	else if (rcast->angle == get_rad(90) || rcast->angle == get_rad(270))
+	else if (rcast->angle == R_90 || rcast->angle == get_rad(270))
 		readjust_point(actual, rcast, 0);
 	else
 	{

@@ -61,14 +61,14 @@ void	update_coordonate(t_player *p)
 	if (p->c_right)
 		cam_move(p, 1);
 	if (p->m_backward)
-		move(p, m_cos(p->actual_view + get_rad(180)), \
-		m_sin(p->actual_view + get_rad(180)));
+		move(p, m_cos(p->actual_view + R_180), \
+		m_sin(p->actual_view + R_180));
 	if (p->m_forward)
 		move(p, cos(p->actual_view), sin(p->actual_view));
 	if (p->m_left)
-		move(p, m_cos(p->actual_view - get_rad(90)), \
-		m_sin(p->actual_view - get_rad(90)));
+		move(p, m_cos(p->actual_view - R_90), \~
+		m_sin(p->actual_view - R_90));
 	if (p->m_right)
-		move(p, m_cos(p->actual_view + get_rad(90)), \
-		m_sin(p->actual_view + get_rad(90)));
+		move(p, m_cos(p->actual_view + R_90), \
+		m_sin(p->actual_view + R_90));
 }

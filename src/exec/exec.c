@@ -53,6 +53,7 @@ int	do_render_loop(t_data_game *dg)
 		&img->bits_per_pixel, &img->size_line, &img->endian);
 	if (!img->addr)
 		return (free_exec_struct(dg->p, dg, MEMORY_ERR));
+	img->ratio_bp = img->bits_per_pixel / 8;
 	mlx_hook(dg->p->mlx_win, 2, 1L << 0, &action_press, dg->p);
 	mlx_hook(dg->p->mlx_win, 3, 1L << 1, &action_release, dg->p);
 	mlx_hook(dg->p->mlx_win, 17, 0L, &action_kill, dg->p);
