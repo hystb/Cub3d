@@ -30,7 +30,7 @@ void	check_extantion(char *path_map)
 			}
 		}
 	}
-	ft_putstr_fd("Error\nExtension of map incorrect", 2);
+	ft_putstr_fd("Error\nExtension of map incorrect\n", 2);
 	exit (0);
 }
 

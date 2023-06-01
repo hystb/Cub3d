@@ -77,7 +77,10 @@ static void	fill_data(char *map_path, t_data_game *data)
 	data->spawn[2] = 0;
 	data->mlx = mlx_init();
 	if (!data->mlx)
-		exit (1);
+	{
+		ft_putstr_fd("Error\nMlx can't be init !\n", STDERR_FILENO);
+		exit(1);
+	}
 	return ;
 }
 

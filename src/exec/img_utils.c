@@ -16,8 +16,9 @@ static void	set_pix_img(t_imgdata *img, int x, int y, int color)
 {
 	char	*target;
 
-	target = img->addr + (y * img->size_line + x * (img->bits_per_pixel / 8));
-	*(unsigned int *) target = color;
+	target = img->addr + (y * img->size_line + x * img->ratio_bp);
+	if (*(int *)target != color)
+		*(int *) target = color;
 }
 
 static float	get_perc_face(int face, t_coord *point)
