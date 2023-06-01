@@ -1,7 +1,7 @@
 #---------------------------------------------------#
 CC 			= cc
 
-CFLAGS 		= -Wall -Wextra -Werror -O3
+CFLAGS 		= -Wall -Wextra -Werror
 
 MLXFLAGS	= -L/libs/mlx -Imlx_linux -lXext -lX11 -lm
 
@@ -12,6 +12,7 @@ OBJ_DIR 	= obj/
 SRCS		= \
 src/exec/actions.c\
 src/exec/exec.c\
+src/exec/events.c\
 src/exec/img_utils.c\
 src/exec/inits.c\
 src/exec/ray_depth.c\

@@ -61,47 +61,14 @@ void	update_coordonate(t_player *p)
 	if (p->c_right)
 		cam_move(p, 1);
 	if (p->m_backward)
-		move(p, m_cos(p->actual_view + get_rad(180)), m_sin(p->actual_view + get_rad(180)));
+		move(p, m_cos(p->actual_view + get_rad(180)), \
+		m_sin(p->actual_view + get_rad(180)));
 	if (p->m_forward)
 		move(p, cos(p->actual_view), sin(p->actual_view));
 	if (p->m_left)
-		move(p, m_cos(p->actual_view - get_rad(90)), m_sin(p->actual_view - get_rad(90)));
+		move(p, m_cos(p->actual_view - get_rad(90)), \
+		m_sin(p->actual_view - get_rad(90)));
 	if (p->m_right)
-		move(p, m_cos(p->actual_view + get_rad(90)), m_sin(p->actual_view + get_rad(90)));
-}
-
-int	action_press(int keycode, t_player *p)
-{
-	if (keycode == 65307)
-		return (free_exec_struct(p, p->game, NULL));
-	if (keycode == 65361)
-		p->c_left = TRUE;
-	if (keycode == 65363)
-		p->c_right = TRUE;
-	if (keycode == 115)
-		p->m_backward = TRUE;
-	if (keycode == 119)
-		p->m_forward = TRUE;
-	if (keycode == 97)
-		p->m_left = TRUE;
-	if (keycode == 100)
-		p->m_right = TRUE;
-	return (0);
-}
-
-int action_release(int keycode, t_player *p)
-{
-	if (keycode == 65361)
-		p->c_left = FALSE;
-	else if (keycode == 65363)
-		p->c_right = FALSE;
-	else if (keycode == 115)
-		p->m_backward = FALSE;
-	else if (keycode == 119)
-		p->m_forward = FALSE;
-	else if (keycode == 97)
-		p->m_left = FALSE;
-	else if (keycode == 100)
-		p->m_right = FALSE;
-	return (0);
+		move(p, m_cos(p->actual_view + get_rad(90)), \
+		m_sin(p->actual_view + get_rad(90)));
 }

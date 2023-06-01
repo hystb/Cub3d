@@ -57,19 +57,19 @@ int	get_face(t_coord *c, t_raycast *rc)
 	y = c->y;
 	if (!is_whole_number(y) && !is_whole_number(x))
 		return (0);
-	if (is_whole_number(y))
-	{
-		if (rc->sin_angle < 0)
-			return (1);
-		else
-			return (3);
-	}
-	else
+	if (is_whole_number(x))
 	{
 		if (rc->cos_angle > 0)
 			return (2);
 		else
 			return (4);
+	}
+	else
+	{
+		if (rc->sin_angle < 0)
+			return (1);
+		else
+			return (3);
 	}
 	return (0);
 }
