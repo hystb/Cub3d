@@ -96,7 +96,6 @@ float	depth_vertical(t_raycast *rcast);
 void	reset_coordoonate(t_raycast *rcast, t_coord *actual);
 void	readjust_point(t_coord *point, t_raycast *rcast, int mode);
 int		do_render_loop(struct s_game_data *data);
-void	render(void *mlx, t_player *p, char **map);
 int		get_texture(int elems[3], float percentage_face, t_data_game *data);
 t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map);
 

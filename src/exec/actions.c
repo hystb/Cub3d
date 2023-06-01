@@ -25,7 +25,6 @@ static int	move(t_player *p, float axisX, float axisY)
 	{
 		p->position->x = x;
 		p->position->y = y;
-		render(p->mlx, p, p->map);
 		return (1);
 	}
 }
@@ -40,7 +39,6 @@ static int	cam_move(t_player *p, float value)
 	if (final_view > M_PI * 2)
 		final_view = fmod (final_view, M_PI * 2);
 	p->actual_view = final_view;
-	render(p->mlx, p, p->map);
 	return (0);
 }
 
