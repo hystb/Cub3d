@@ -116,6 +116,8 @@ void	create_mlx_tools(t_data_game *dg);
 
 /* movements */
 void	update_coordonate(t_player *p);
+int		is_block(int x, int y, char **map);
+int		is_wall_touched(t_coord	*point, char **map);
 int		action_press(int keycode, t_player *p);
 int		action_release(int keycode, t_player *p);
 

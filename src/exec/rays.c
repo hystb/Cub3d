@@ -12,15 +12,6 @@
 
 #include "../../includes/exec.h"
 
-static int	is_wall_touched(t_coord	*point, char **map)
-{
-	if ((int) point->y < 0 || (int) point->x < 0)
-		return (2);
-	if (map[(int) point->y][(int) point->x] == '1')
-		return (1);
-	return (0);
-}
-
 static t_coord	*calc_values(t_raycast *rcast, t_player *p)
 {
 	rcast->cos_angle = cos(rcast->angle);

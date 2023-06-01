@@ -11,6 +11,7 @@ OBJ_DIR 	= obj/
 
 SRCS		= \
 src/exec/actions.c\
+src/exec/collision.c\
 src/exec/exec.c\
 src/exec/events.c\
 src/exec/img_utils.c\

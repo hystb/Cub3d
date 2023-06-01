@@ -19,7 +19,7 @@ static int	move(t_player *p, float axisX, float axisY)
 
 	x = p->position->x + axisX * SPEED_MOV;
 	y = p->position->y + axisY * SPEED_MOV;
-	if (p->map[(int) y][(int) x] == '1')
+	if (is_block(x, y, p->map))
 		return (0);
 	else
 	{
@@ -66,7 +66,7 @@ void	update_coordonate(t_player *p)
 	if (p->m_forward)
 		move(p, cos(p->actual_view), sin(p->actual_view));
 	if (p->m_left)
-		move(p, m_cos(p->actual_view - R_90), \~
+		move(p, m_cos(p->actual_view - R_90), \
 		m_sin(p->actual_view - R_90));
 	if (p->m_right)
 		move(p, m_cos(p->actual_view + R_90), \
