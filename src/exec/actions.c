@@ -19,7 +19,9 @@ static int	move(t_player *p, float axisX, float axisY)
 
 	x = p->position->x + axisX * SPEED_MOV;
 	y = p->position->y + axisY * SPEED_MOV;
-	if (is_block(x, y, p->map))
+	if (is_block(x, y, p->map) || is_block(x + 0.1, y - 0.1, p->map) \
+	|| is_block(x + 0.1, y + 0.1, p->map) || is_block(x - 0.1, y + 0.1, p->map) \
+	|| is_block(x - 0.1, y - 0.1, p->map))
 		return (0);
 	else
 	{
@@ -35,23 +37,24 @@ static int	cam_move(t_player *p, float value)
 
 	final_view = p->actual_view;
 	final_view += value * SPEED_CAM;
-	final_view = final_view + M_PI * 2;
-	if (final_view > M_PI * 2)
-		final_view = fmod (final_view, M_PI * 2);
+	if (final_view < 0)
+		final_view = fmod(final_view + M_PI * 2, M_PI * 2);
 	p->actual_view = final_view;
 	return (0);
 }
 
 static float	m_sin(float angle)
 {
-	angle += M_PI * 2;
-	return (sin(fmod(angle, M_PI * 2)));
+	if (angle < 0)
+		angle = fmod(angle + M_PI * 2, M_PI * 2);
+	return (sin(angle));
 }
 
 static float	m_cos(float angle)
 {
-	angle += M_PI * 2;
-	return (cos(fmod(angle, M_PI * 2)));
+	if (angle < 0)
+		angle = fmod(angle + M_PI * 2, M_PI * 2);
+	return (cos(angle));
 }
 
 void	update_coordonate(t_player *p)

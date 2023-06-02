@@ -22,6 +22,24 @@ static t_coord	*calc_values(t_raycast *rcast, t_player *p)
 	return (p->position);
 }
 
+static void	actualize_face(t_raycast *rcast, int mode)
+{
+	if (mode == 0)
+	{
+		if (rcast->cos_angle > 0)
+			rcast->face = 2;
+		else
+			rcast->face = 4;
+	}
+	else
+	{
+		if (rcast->sin_angle < 0)
+			rcast->face = 1;
+		else
+			rcast->face = 3;
+	}
+}
+
 static t_coord	*do_classic(t_raycast *rcast)
 {
 	t_coord	*actual;
@@ -32,14 +50,15 @@ static t_coord	*do_classic(t_raycast *rcast)
 	{
 		actual = rcast->hor;
 		rcast->result += rcast->depth_hor;
-		reset_coordoonate(rcast, actual);
+		actualize_face(rcast, 1);
 	}
 	else
 	{
 		actual = rcast->ver;
 		rcast->result += rcast->depth_ver;
-		reset_coordoonate(rcast, actual);
+		actualize_face(rcast, 0);
 	}
+	reset_coordoonate(rcast, actual);
 	return (actual);
 }
 
@@ -51,14 +70,15 @@ static t_coord	*do_only(t_raycast *rcast, int mode)
 	{
 		rcast->result += depth_horizontal(rcast);
 		actual = rcast->hor;
-		reset_coordoonate(rcast, actual);
+		actualize_face(rcast, 1);
 	}
 	else
 	{
 		rcast->result += depth_vertical(rcast);
 		actual = rcast->ver;
-		reset_coordoonate(rcast, actual);
+		actualize_face(rcast, 0);
 	}
+	reset_coordoonate(rcast, actual);
 	return (actual);
 }
 

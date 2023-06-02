@@ -18,7 +18,7 @@ static void	set_pix_img(t_imgdata *img, int x, int y, int color)
 
 	target = img->addr + (y * img->size_line + x * img->ratio_bp);
 	if (*(int *)target != color)
-		*(int *) target = color;
+		*(int *)target = color;
 }
 
 static float	get_perc_face(int face, t_coord *point)
@@ -57,13 +57,13 @@ static void	classic_line(t_data_game *data, int size, int x_img, int face)
 	{
 		if (y < start)
 			set_pix_img(data->p->rcast->imgdata, x_img, y, \
-			data->p->floor_c);
+			data->p->roof_c);
 		else if (y >= start && y < start + size)
 			set_pix_img(data->p->rcast->imgdata, x_img, y, \
 			get_texture((int [3]){face, size, y - start}, get_perc_face(face, \
 			point), data));
 		else
-			set_pix_img(data->p->rcast->imgdata, x_img, y, data->p->roof_c);
+			set_pix_img(data->p->rcast->imgdata, x_img, y, data->p->floor_c);
 		y++;
 	}
 }

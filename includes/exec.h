@@ -53,6 +53,7 @@ typedef struct s_raycast
 	t_coord		*ver;
 	t_coord		*target;
 	t_imgdata	*imgdata;
+	int			face;
 	float		x;
 	float		y;
 	float		x_map;
@@ -88,9 +89,6 @@ typedef struct s_player
 	int					c_left;
 	int					c_right;
 }				t_player;
-
-/* collisions */
-int		get_face(t_coord *c, t_raycast *rc);
 
 /* mlx	*/
 void	draw_vertical_line(t_data_game *data, int size, int x_img, int face);
