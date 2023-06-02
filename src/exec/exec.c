@@ -29,10 +29,10 @@ int	render(t_player *p)
 		rc->y = p->position->y;
 		rc->target = ray_length(rc, p, p->map);
 		item_size = p->screen_ratio / rc->result;
-		draw_vertical_line(p->game, item_size, x, get_face(rc->target, rc));
+		draw_vertical_line(p->game, item_size, x, rc->face);
 		x++;
-		rc->angle = atan((x + 0.00001 - p->win_x / 2) / \
-		(p->screen_ratio)) + (p->actual_view);
+		rc->angle = atan((x + 0.0001 - p->win_x / 2) / \
+		(p->screen_ratio)) + (p->actual_view) + 0.0001;
 	}
 	mlx_put_image_to_window(p->mlx, p->mlx_win, rc->imgdata->img, 0, 0);
 	return (0);
