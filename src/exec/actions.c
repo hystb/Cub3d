@@ -19,7 +19,9 @@ static int	move(t_player *p, float axisX, float axisY)
 
 	x = p->position->x + axisX * SPEED_MOV;
 	y = p->position->y + axisY * SPEED_MOV;
-	if (is_block(x, y, p->map))
+	if (is_block(x, y, p->map) || is_block(x + 0.1, y - 0.1, p->map) \
+	|| is_block(x + 0.1, y + 0.1, p->map) || is_block(x - 0.1, y + 0.1, p->map) \
+	|| is_block(x - 0.1, y - 0.1, p->map))
 		return (0);
 	else
 	{
