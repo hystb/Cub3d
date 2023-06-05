@@ -6,7 +6,7 @@
 /*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:44:12 by nmilan            #+#    #+#             */
-/*   Updated: 2023/05/05 13:44:14 by nmilan           ###   ########.fr       */
+/*   Updated: 2023/06/05 13:42:16 by nmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	**import_map(const char *file_map)
 			map_path_is_not_correct(map);
 	}
 	map[i] = NULL;
+	close(fd);
 	return (map);
 }
 

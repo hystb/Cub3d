@@ -4,12 +4,12 @@ NO ./assets/Gem5.xpm
 SO ./assets/Gem6.xpm
 WE ./assets/Gem7.xpm
 
-EA ./assets/Gem8.xpm
+EA ./assets/StoneWall_TXR.xpm
 
 
 
-F 255,255,255
-C 16,255,3
+F 139, 0, 0
+C 54, 55, 55
 
 
 11111111111111111111111111111111111111111111111111111111

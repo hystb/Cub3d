@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   img_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebillon <ebillon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:21:27 by ebillon           #+#    #+#             */
-/*   Updated: 2023/05/25 13:21:28 by ebillon          ###   ########.fr       */
+/*   Updated: 2023/06/05 13:32:38 by nmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	over_flow_line(t_data_game *data, int size, int x_img, int face)
 	while (y++ < data->p->win_y)
 		set_pix_img(data->p->rcast->imgdata, x_img, y, \
 		get_texture((int [3]){face, size, start++}, \
-		get_perc_face(face, point), data));
+		get_perc_face(face, point), data, 0));
 }
 
 static void	classic_line(t_data_game *data, int size, int x_img, int face)
@@ -61,7 +61,7 @@ static void	classic_line(t_data_game *data, int size, int x_img, int face)
 		else if (y >= start && y < start + size)
 			set_pix_img(data->p->rcast->imgdata, x_img, y, \
 			get_texture((int [3]){face, size, y - start}, get_perc_face(face, \
-			point), data));
+			point), data, 0));
 		else
 			set_pix_img(data->p->rcast->imgdata, x_img, y, data->p->floor_c);
 		y++;
