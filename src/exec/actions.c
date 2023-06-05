@@ -12,10 +12,10 @@
 
 #include "../../includes/exec.h"
 
-static int	move(t_player *p, float axisX, float axisY)
+static int	move(t_player *p, double axisX, double axisY)
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 
 	x = p->position->x + axisX * SPEED_MOV;
 	y = p->position->y + axisY * SPEED_MOV;
@@ -31,9 +31,9 @@ static int	move(t_player *p, float axisX, float axisY)
 	}
 }
 
-static int	cam_move(t_player *p, float value)
+static int	cam_move(t_player *p, double value)
 {
-	float	final_view;
+	double	final_view;
 
 	final_view = p->actual_view;
 	final_view += value * SPEED_CAM;
@@ -43,14 +43,14 @@ static int	cam_move(t_player *p, float value)
 	return (0);
 }
 
-static float	m_sin(float angle)
+static double	m_sin(double angle)
 {
 	if (angle < 0)
 		angle = fmod(angle + M_PI * 2, M_PI * 2);
 	return (sin(angle));
 }
 
-static float	m_cos(float angle)
+static double	m_cos(double angle)
 {
 	if (angle < 0)
 		angle = fmod(angle + M_PI * 2, M_PI * 2);

@@ -37,7 +37,7 @@ static int	malloc_struct(t_data_game *data)
 	return (0);
 }
 
-static float	get_spawn_view(int e)
+static double	get_spawn_view(int e)
 {
 	if (e == 'N')
 		return (get_rad(270) + 0.0001);

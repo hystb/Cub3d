@@ -33,8 +33,8 @@
 
 typedef struct s_coord
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }				t_coord;
 
 typedef struct s_imgdata
@@ -54,17 +54,17 @@ typedef struct s_raycast
 	t_coord		*target;
 	t_imgdata	*imgdata;
 	int			face;
-	float		x;
-	float		y;
-	float		x_map;
-	float		y_map;
-	float		sin_angle;
-	float		cos_angle;
-	float		angle;
-	float		depth_hor;
-	float		depth_ver;
-	float		depth_box;
-	float		result;
+	double		x;
+	double		y;
+	double		x_map;
+	double		y_map;
+	double		sin_angle;
+	double		cos_angle;
+	double		angle;
+	double		depth_hor;
+	double		depth_ver;
+	double		depth_box;
+	double		result;
 }				t_raycast;
 
 typedef struct s_player
@@ -75,9 +75,9 @@ typedef struct s_player
 	void				*mlx_win;
 	void				*mlx;
 	char				**map;
-	float				actual_view;
-	float				step;
-	float				screen_ratio;
+	double				actual_view;
+	double				step;
+	double				screen_ratio;
 	int					win_x;
 	int					win_y;
 	int					floor_c;
@@ -97,15 +97,15 @@ int		action_move(int keycode, t_player *player);
 int		action_cam(int keycode, t_player *player);
 
 /* math tools */
-float	get_rad(float angle);
+double	get_rad(double angle);
 
 /* raycasting */
-float	depth_horizontal(t_raycast *rcast);
-float	depth_vertical(t_raycast *rcast);
+double	depth_horizontal(t_raycast *rcast);
+double	depth_vertical(t_raycast *rcast);
 void	reset_coordoonate(t_raycast *rcast, t_coord *actual);
 void	readjust_point(t_coord *point, t_raycast *rcast, int mode);
 int		do_render_loop(struct s_game_data *data);
-int		get_texture(int elems[3], float percentage_face, t_data_game *data, \
+int		get_texture(int elems[3], double percentage_face, t_data_game *data, \
 u_int32_t color);
 t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map);
 

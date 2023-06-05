@@ -16,7 +16,7 @@
 int	render(t_player *p)
 {
 	t_raycast	*rc;
-	float		item_size;
+	double		item_size;
 	int			x;
 
 	update_coordonate(p);

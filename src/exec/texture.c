@@ -38,7 +38,7 @@ int	get_color(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-int	get_texture(int elems[3], float percentage_face, t_data_game *data, \
+int	get_texture(int elems[3], double percentage_face, t_data_game *data, \
 u_int32_t color)
 {
 	t_img		*img;
