@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebillon <ebillon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:44:28 by nmilan            #+#    #+#             */
-/*   Updated: 2023/06/01 12:25:50 by ebillon          ###   ########.fr       */
+/*   Updated: 2023/06/05 13:28:52 by nmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define FOV M_PI_2
 # define R_90 M_PI_2
 # define R_180 M_PI
-# define SPEED_MOV 0.13
+# define SPEED_MOV 0.2
 # define SPEED_CAM 0.1
 # define WIN_TITLE "Cube3D"
 # define MEMORY_ERR "Memory allocation error !\n"
@@ -105,7 +105,8 @@ float	depth_vertical(t_raycast *rcast);
 void	reset_coordoonate(t_raycast *rcast, t_coord *actual);
 void	readjust_point(t_coord *point, t_raycast *rcast, int mode);
 int		do_render_loop(struct s_game_data *data);
-int		get_texture(int elems[3], float percentage_face, t_data_game *data);
+int		get_texture(int elems[3], float percentage_face, t_data_game *data, \
+u_int32_t color);
 t_coord	*ray_length(t_raycast *rcast, t_player *p, char **map);
 
 /* utils */
