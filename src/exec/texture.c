@@ -6,7 +6,7 @@
 /*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:35:39 by ebillon           #+#    #+#             */
-/*   Updated: 2023/06/05 13:37:31 by nmilan           ###   ########.fr       */
+/*   Updated: 2023/06/05 15:02:23 by nmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ u_int32_t color)
 		img = data->west;
 	src = get_texture_data(elems[0], data, NULL);
 	x = percentage_face * img->width;
-	y = (img->height * elems[2]) / elems[1] * img->height;
+	y = (img->height * elems[2]) / elems[1] * img->width;
 	pixel = x + y;
+	if (img->width * img->height < pixel)
+		pixel = (img->width * img->height);
 	color = src[pixel];
 	return (color);
 }

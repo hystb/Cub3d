@@ -6,7 +6,7 @@
 /*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:21:27 by ebillon           #+#    #+#             */
-/*   Updated: 2023/06/05 13:32:38 by nmilan           ###   ########.fr       */
+/*   Updated: 2023/06/05 14:56:06 by nmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,14 @@ static void	set_pix_img(t_imgdata *img, int x, int y, int color)
 
 static float	get_perc_face(int face, t_coord *point)
 {
-	if (face == 1 || face == 3)
+	if (face == 1)
 		return (point->x - (int)(point->x));
-	else
+	else if (face == 3)
+		return (1 - (point->x - (int)(point->x)));
+	else if (face == 2)
 		return (point->y - (int)(point->y));
+	else
+		return (1 - (point->y - (int)(point->y)));
 }
 
 static void	over_flow_line(t_data_game *data, int size, int x_img, int face)

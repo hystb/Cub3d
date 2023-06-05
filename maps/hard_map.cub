@@ -1,15 +1,15 @@
 
 
-NO ./assets/Gem5.xpm
-SO ./assets/Gem6.xpm
-WE ./assets/Gem7.xpm
+NO assets/shreck_chad_1.xpm
+SO assets/shreck_chad_1.xpm
+WE assets/shreck_chad_1.xpm
 
-EA ./assets/StoneWall_TXR.xpm
+EA assets/shreck_chad_1.xpm
 
 
 
-F 139, 0, 0
-C 54, 55, 55
+F 139, 139, 0
+C 255, 255, 0
 
 
 11111111111111111111111111111111111111111111111111111111
