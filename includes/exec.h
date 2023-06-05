@@ -6,7 +6,7 @@
 /*   By: ebillon <ebillon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:44:28 by nmilan            #+#    #+#             */
-/*   Updated: 2023/06/01 12:25:50 by ebillon          ###   ########.fr       */
+/*   Updated: 2023/06/05 12:28:03 by ebillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define FOV M_PI_2
 # define R_90 M_PI_2
 # define R_180 M_PI
-# define SPEED_MOV 0.13
+# define SPEED_MOV 0.2
 # define SPEED_CAM 0.1
 # define WIN_TITLE "Cube3D"
 # define MEMORY_ERR "Memory allocation error !\n"
