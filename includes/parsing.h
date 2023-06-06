@@ -49,7 +49,7 @@ typedef struct s_game_data
 int			len_column(const char *file_map);
 void		check_extantion(char *path_map);
 t_data_game	read_map(char *map_path, int i, int map_reached);
-char		**import_map(const char *file_map);
+char		**import_map(const char *file_map, int i, int fd);
 void		pars_map(t_data_game *data);
 
 //error

@@ -53,7 +53,7 @@ all: lib
 $(NAME): $(OBJS) $(INCLUDES) $(LIBFT_EXEC)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I $(INCLUDES) $(LIBFT_EXEC) $(MLX_EXEC) $(MLXFLAGS) 
 
-$(OBJ_DIR)/%.o : %.c Makefile $(HEADERS)
+$(OBJ_DIR)/%.o : %.c $(HEADERS)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -75,5 +75,5 @@ re:	fclean
 	$(MAKE) -C $(MLX_DIR) re
 	$(MAKE) all
 
-.PHONY: all lib fclean re
+.PHONY: all lib clean fclean re
 #---------------------------------------------------#

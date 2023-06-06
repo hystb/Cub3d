@@ -38,8 +38,8 @@ static int	cam_move(t_player *p, double value)
 	final_view = p->actual_view;
 	final_view += value * SPEED_CAM;
 	if (final_view < 0)
-		final_view = fmod(final_view + M_PI * 2, M_PI * 2);
-	p->actual_view = final_view;
+		final_view += M_PI * 2;
+	p->actual_view = fmod(final_view, M_PI * 2);
 	return (0);
 }
 

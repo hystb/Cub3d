@@ -34,21 +34,21 @@ void	check_extantion(char *path_map)
 	exit (0);
 }
 
-char	**import_map(const char *file_map)
+char	**import_map(const char *file_map, int i, int fd)
 {
-	int		fd;
 	char	**map;
 	int		map_size;
-	int		i;
 
 	map_size = len_column(file_map);
-	i = 0;
 	map = malloc(sizeof(char *) * (map_size + 1));
 	if (!map)
-		return (NULL);
+	{
+		ft_putstr_fd("Error\nMemory allocation failed\n", STDERR_FILENO);
+		exit(1);
+	}
 	fd = open(file_map, O_RDONLY);
 	if (!fd)
-		return (NULL);
+		return (map);
 	map[i++] = get_next_line(fd);
 	if (!map[i - 1] && i > 0)
 		map_path_is_not_correct(map);

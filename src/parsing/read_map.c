@@ -64,7 +64,7 @@ static void	fill_rgb(unsigned char *rgb, char *str, int *data)
 static void	fill_data(char *map_path, t_data_game *data)
 {
 	check_extantion(map_path);
-	data->all_readed = import_map(map_path);
+	data->all_readed = import_map(map_path, 0, 0);
 	data->east = NULL;
 	data->map = NULL;
 	data->south = NULL;
@@ -78,6 +78,7 @@ static void	fill_data(char *map_path, t_data_game *data)
 	data->mlx = mlx_init();
 	if (!data->mlx)
 	{
+		free_map(data->all_readed);
 		ft_putstr_fd("Error\nMlx can't be init !\n", STDERR_FILENO);
 		exit(1);
 	}

@@ -27,7 +27,7 @@
 # define SPEED_MOV 0.2
 # define SPEED_CAM 0.1
 # define WIN_TITLE "Cube3D"
-# define MEMORY_ERR "Memory allocation error !\n"
+# define MEMORY_ERR "Error\nMemory allocation error !\n"
 # define FALSE 0
 # define TRUE 1
 
